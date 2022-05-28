@@ -7,6 +7,9 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@unocss/nuxt": "^0.34.1",
+    "@unocss/preset-attributify": "^0.34.1",
+    "@unocss/preset-uno": "^0.34.1",
     "nuxt": "3.0.0-rc.3"
   }
 }
