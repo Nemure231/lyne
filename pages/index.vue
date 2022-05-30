@@ -57,6 +57,7 @@ const searchData = ref<SearchSticker>({
     link: '',
 });
 
+
 const loadingData = ref<boolean>();
 
 let checkUrlImg = (url) => {
@@ -67,11 +68,16 @@ let checkUrlImg = (url) => {
     }
 }
 
-let fec = (link: string) => {
+
+const loadImgTime = ref<number>(0)
+
+let fec = async (link: string) => {
     let id: number = Number(link.split('/')[5]);
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
-    console.log(id, reg)
+
+    const startLoadImgTime = new Date().getTime();
+
     if (checkUrlType === true) {
         if (typeof id != "number" || id === 0 || isNaN(id)) {
             alert(`The url doesn't have id of sticker line!`);
@@ -80,58 +86,35 @@ let fec = (link: string) => {
             alert(`The url doesn't have region of sticker line!`)
         } else {
             loadingData.value = true
-            setTimeout(async () => {
-                const response = await $fetch(`/api/sticker/${id}/${reg}`);
-                stickersData.value = response
-
-                if (stickersData.value.success === true) {
-                    loadingData.value = false
-                }
-                console.log(response)
-
-            }, 1000);
+            loadImgTime.value = new Date().getTime() - startLoadImgTime;
+            const response = await $fetch(`/api/sticker/${id}/${reg}`);
+            stickersData.value = response
+            console.log(response)
         }
+
+        setTimeout(async () => {
+            loadingData.value = false
+        }, loadImgTime.value);
+
     } else {
         alert('The url only accept https protocol!')
     }
 }
 
+provide('stickersListProvideData', () => stickersData.value.data.stickers);
+provide('stickersInfoProvideData', () => stickersData.value.data);
+provide('stickersStatusProvideData', () => stickersData.value);
 
-const isLoading = computed(() => {
-    return loadingData.value ? 'loading' : 'not loading'
-})
-
-// const isImage = computed(() => {
-
-//     if (stickersData.value.status === 200) {
-//         // Stiker ketemu
-//         return ''
-//     } else if (stickersData.value.status === 204) {
-//         // Stiker ketemu tapi gak bisa dl
-//         return ''
-//     } else {
-//         // Stiker gak ketemu
-//         return
-//     }
-// })
+provide('loadingStickersProvideData', () => loadingData.value);
+provide('lengthStickersProvideData', () => stickersData.value.data.stickers.length);
 
 </script>
 
 <template>
     <div bg-white mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative>
-
-        <BaseNav 
-            @childFec="(event) => fec(event)" 
-            :searchPropsData="searchData.link"
-        />
-        <BaseMain 
-            @childFec="(event) => fec(event)"
-            :stickersInfoPropsData="stickersData"
-            :stickersListPropsData="stickersData.data.stickers"
-            :loadingPropsData="loadingData" 
-            :searchPropsData="searchData.link"
-            :lengthPropsData="stickersData.data.stickers.length"
-        />
+        <BaseNav @childFec="(event) => fec(event)" :searchPropsData="searchData.link" />
+        <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
+            :lengthPropsData="stickersData.data.stickers.length" />
         <BaseFooter />
     </div>
 </template>
