@@ -168,23 +168,16 @@ useHead({
         }
     ],
     bodyAttrs: {
-        class: 'mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative'
+        class: 'mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative m-0 overflow-x-hidden'
     }
 })
 </script>
 
 <template>
-    <div bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative>
+    <div bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible md:overflow-x-visible overflow-x-hidden>
         <BaseNav @childFec="(event) => fec(event)" :searchPropsData="searchData.link" />
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
             :lengthPropsData="stickersData.data.stickers.length" />
         <BaseFooter />
     </div>
 </template>
-
-<style>
-body {
-    margin: 0px;
-    overflow-x: hidden;
-}
-</style>

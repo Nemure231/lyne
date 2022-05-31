@@ -4,8 +4,7 @@ const stickersStatus = inject('stickersStatusProvideData');
 
 const loadingSticker =  inject('loadingStickersProvideData');
 const lengthSticker = inject('lengthStickersProvideData')
-
-
+const stickersInfo = inject('stickersInfoProvideData');
 </script>
 
 
@@ -30,12 +29,9 @@ const lengthSticker = inject('lengthStickersProvideData')
     </template>
     <template v-else>
         <template v-if="lengthSticker() >= 2 || stickersStatus().status === 200">
-            <p lg:text-lg md:text-lg text-base text-justify text-gray-600>
-                Official Stickers Vol. 1 of "Girls' Frontline", contains a
-                lot of
-                funny
-                stickers about Tactical Girls. Full of cuteness! Full of
-                laughter!
+            <p v-text="stickersInfo().desc"
+            lg:text-lg md:text-lg text-base text-justify text-gray-600>
+               
             </p>
         </template>
 

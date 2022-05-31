@@ -20,14 +20,12 @@ onMounted(() => {
 })
 </script>
 <template>
-    <main flex-1 z-10>
-
+    <main flex-1 z-10 lg:overflow-x-visible md:overflow-x-visible overflow-x-hidden>
         <div  w-full flex flex-wrap flex-col justify-center items-center >
-
             <section flex-1 lg:mt-6 md:mt-6 mt-2 mb-20 relative w-full h-full>
                 <div flex justify-center flex-wrap>
                     <div relative flex-1 2xl:max-w-7xl gap-y-6 lg:max-w-5xl md:max-w-3xl sm:max-w-xl max-w-max lg:mx-3
-                        md:mx-2 mx-4>
+                        md:mx-2 mx-6>
     
                         <form @submit.prevent="childFec()" lg:flex md:flex hidden justify-end flex-row flex-wrap
                             items-center gap-3 mr-4>
@@ -50,13 +48,12 @@ onMounted(() => {
                             </button>
                         </form>
                         <FrontInfo />
-    
                         <ErrorNotFound />
                         <ErrorExpired />
     
                         <div flex justify-start lg:flex-row md:flex-row flex-wrap flex-col mt-10 gap-x-6>
                             <div flex-none>
-                                <div flex flex-col lg:sticky md:sticky relative lg:top-16 md:top-16 top-0>
+                                <div flex flex-col lg:sticky md:sticky relative lg:top-19 md:top-19 top-0>
                                     <div flex-none>
                                         <div flex sm:flex-row flex-col flex-nowrap items-center justify-center font-sans
                                             gap-x-3>
