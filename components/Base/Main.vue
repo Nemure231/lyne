@@ -121,7 +121,8 @@ const childFec = () => {
                                     <div flex flex-col flex-wrap>
 
                                         <StickerDesc />
-                                        <div flex flex-row flex-nowrap gap-x-6 mt-6
+                                        <div flex flex-row flex-nowrap gap-x-6 mt-6>
+                                            
                                         </div>
                                     </div>
                                 </div>
