@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
+import { saveAs } from 'file-saver';
 const stickersStatus = inject('stickersStatusProvideData');
 const stickersList = inject('stickersListProvideData');
 const loadingSticker = inject('loadingStickersProvideData');
@@ -7,6 +8,19 @@ const lengthSticker = inject('lengthStickersProvideData')
 
 const focusScale = ref(0);
 const defaultLoop = ref<number>(1);
+
+let downloadOneImg = async (eve: string, id: number) => {
+    await fetch(eve)
+        .then(response => {
+            return response.blob();
+        })
+        .then(blob => {
+            saveAs(blob, `${id}.png`);
+        })
+}
+
+
+
 </script>
 
 
@@ -32,7 +46,8 @@ const defaultLoop = ref<number>(1);
                         <div @click="focusScale = pl.id" :id="`focusBgSticker${pl.id}`"
                             :class="focusScale === pl.id ? 'bg-white/0' : (focusScale === 0 ? 'bg-white/0' : 'bg-white/48')"
                             absolute inset-0 class="hover:bg-white/0">
-                            <button :class="focusScale === pl.id ? 'flex' : 'hidden'" justify-center items-center
+                            <button @click="downloadOneImg(pl.staticUrl, pl.id)"
+                                :class="focusScale === pl.id ? 'flex' : 'hidden'" justify-center items-center
                                 border-none bg-white p-1.5 rounded-bl-md absolute right-0 top-0 cursor-pointer>
                                 <svg lg:w-6 lg:h-6 md:w-6 md:h-6 w-5 h-5 fill-green-500
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
