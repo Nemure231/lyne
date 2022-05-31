@@ -68,6 +68,7 @@ let checkUrlImg = (url) => {
 const loadImgTime = ref<number>(0)
 
 let fec = async (link: string) => {
+    
     let id: number = Number(link.split('/')[5]);
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);

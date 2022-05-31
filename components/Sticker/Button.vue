@@ -19,6 +19,7 @@ let downloadImg = async () => {
     });
 
     Promise.all(list.value.map(url => {
+        list.value = [];
         fetch(url)
             .then(response => {
                 return response.blob();
@@ -30,7 +31,6 @@ let downloadImg = async () => {
 
 
     var zip = new JSZip();
-
     setTimeout(() => {
         stickerList.value.forEach(el => {
             zip.file(`${count + 1}.png`, el, {
@@ -43,11 +43,12 @@ let downloadImg = async () => {
                 })
                 .then(function (content) {
                     saveAs(content, `Lyn_${stickersInfo().title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
+                    stickerList.value = []
                 });
             }
         });
 
-    }, 200)
+    }, 1000)
 
 
 

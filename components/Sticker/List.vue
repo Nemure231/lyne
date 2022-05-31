@@ -19,8 +19,6 @@ let downloadOneImg = async (eve: string, id: number) => {
         })
 }
 
-
-
 </script>
 
 
