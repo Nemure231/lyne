@@ -22,8 +22,6 @@ interface Sticker {
             }
         ]
     }
-
-
 }
 
 interface SearchSticker {
@@ -56,7 +54,6 @@ const stickersData = ref<Sticker>({
 const searchData = ref<SearchSticker>({
     link: '',
 });
-
 
 const loadingData = ref<boolean>();
 

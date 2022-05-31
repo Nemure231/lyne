@@ -2,7 +2,7 @@
 
 const stickersStatus = inject('stickersStatusProvideData');
 
-const loadingSticker = inject('loadingStickersProvideData');
+const loadingSticker =  inject('loadingStickersProvideData');
 const lengthSticker = inject('lengthStickersProvideData')
 
 

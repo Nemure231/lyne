@@ -23,7 +23,7 @@ const childFec = () => {
             </span>
             <form @submit.prevent="childFec()" lg:hidden md:hidden flex justify-end flex-row flex-wrap lg:mr-6 md:mr-6 mr-4
                 items-center gap-1>
-                <input v-model="searchPropsData" shadow-lg focus:outline-none border-none text-xs sm:w-80 w-40  rounded-3xl px-3 type="text" class="py-1.5" 
+                <input v-model="searchPropsData" shadow-lg focus:outline-none border-none text-xs sm:w-80 w-40  rounded-3xl px-3 type="text" class="py-2" 
                 placeholder="Link sticker ...."/>
 
                 <button type="submit" hover:bg-gray-200 shadow-lg inline-flex lg:justify-center md:justify-center

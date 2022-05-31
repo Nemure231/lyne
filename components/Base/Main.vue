@@ -1,47 +1,9 @@
 
 <script setup lang="ts">
-import { OnClickOutside } from '@vueuse/components'
 
 interface propsInter {
-    // loadingPropsData?: boolean,
     searchPropsData?: string,
-    // lengthPropsData?: number,
-    // stickersListPropsData?: {
-    //     type: string,
-    //     id: number,
-    //     staticUrl: string,
-    //     fallbackStaticUrl: string,
-    //     animationUrl: string,
-    //     popUrl: string,
-    //     soundUrl: string,
-    // },
-    // stickersInfoPropsData?: {
-    //     success: boolean;
-    //     message: string;
-    //     status: number,
-    //     data: {
-    //         title: string,
-    //         icon: string,
-    //         desc: string,
-    //         url: string,
-    //     }
-    // }
 }
-
-
-
-// interface propsInter {
-//     stickersListPropsData?: {
-//         type: string,
-//         id: number,
-//         staticUrl: string,
-//         fallbackStaticUrl: string,
-//         animationUrl: string,
-//         popUrl: string,
-//         soundUrl: string,
-//     },
-// }
-
 
 const props = defineProps<propsInter>();
 
@@ -62,9 +24,13 @@ const childFec = () => {
 
                     <form @submit.prevent="childFec()" lg:flex md:flex hidden justify-end flex-row flex-wrap
                         items-center gap-3>
+
+
                         <input v-model="searchPropsData" shadow-lg focus:outline-none border-3 border-green-500
                             xl:text-lg text-base xl:w-96 lg:w-80 md:w-90 w-72 rounded-3xl px-3 xl:py-3 py-3 type="text"
                             placeholder="Link sticker ...." />
+
+
                         <button type="submit" hover:bg-green-400 shadow-lg inline-flex lg:justify-center
                             md:justify-center justify-center lg:gap-x-0 md:gap-x-0 gap-x-2 px-6 items-center
                             cursor-pointer lg:w-14 lg:h-14 md:w-14 md:h-14 h-10 w-77 bg-green-500 border-none
