@@ -17,7 +17,7 @@ const loadingSticker = inject('loadingStickersProvideData');
                         Line Sticker Downloader
                     </h2>
                 </div>
-                <div flex flex-nowrap flex-row items-center justify-center mx-auto xl:w-130 lg:w-130 md:w-96 w-70
+                <div flex flex-nowrap flex-row items-center justify-center mx-auto xl:w-130 lg:w-130 md:w-96 w-64
                     lg:gap-x-6 md:gap-x-6 gap-x-3 font-sans text-gray-600>
                     <div flex-none>
                         <div flex flex-col items-center>

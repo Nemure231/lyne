@@ -65,7 +65,6 @@ let checkUrlImg = (url) => {
     }
 }
 
-
 const loadImgTime = ref<number>(0)
 
 let fec = async (link: string) => {
@@ -82,6 +81,7 @@ let fec = async (link: string) => {
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
             alert(`The url doesn't have region of sticker line!`)
         } else {
+            searchData.value.link = ''
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
             const response = await $fetch(`/api/sticker/${id}/${reg}`);
@@ -105,10 +105,76 @@ provide('stickersStatusProvideData', () => stickersData.value);
 provide('loadingStickersProvideData', () => loadingData.value);
 provide('lengthStickersProvideData', () => stickersData.value.data.stickers.length);
 
+
+useHead({
+    title: 'Lyne',
+    viewport: 'width=device-width, initial-scale=1.0',
+    charset: 'utf-8',
+    meta: [
+        { 
+            name: 'description', 
+            content: 'Line stickers downloader' 
+        },
+        { 
+            name: 'keywords', 
+            content: 'downloader, download, scrap, image, ' 
+        },
+        { 
+            name: 'author', 
+            content: 'Karol.Y' 
+        },
+        { 
+            name: 'theme-color', 
+            content: '#1f1f1f' 
+        },
+        { 
+            property: 'og:type', 
+            content: 'website' 
+        },
+        {
+            name: 'twitter:card',
+            content: 'summary_large_image'
+        },
+        {
+            property: 'og:site_name', 
+            content: 'Lyne'
+        },
+        {
+            property:'og:title',
+            content: 'Lyne'
+        },
+        {
+            property: 'og:url', 
+            content: 'https://lyne.netlify.app/'
+        },
+        {
+            property: 'og:description',
+            content: 'Line stickers downloader'
+
+        },
+        {
+            property: 'og:image',
+            content: '/img/logo/logo.png'
+        },
+        {
+            property: 'og:image:alt',
+            content: 'Lyne'
+        }
+    ],
+    link: [
+        {
+            rel: 'icon',
+            href: '/img/logo/favicon.ico'
+        }
+    ],
+    bodyAttrs: {
+        class: 'mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative'
+    }
+})
 </script>
 
 <template>
-    <div bg-white mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative>
+    <div bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative>
         <BaseNav @childFec="(event) => fec(event)" :searchPropsData="searchData.link" />
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
             :lengthPropsData="stickersData.data.stickers.length" />
@@ -119,6 +185,6 @@ provide('lengthStickersProvideData', () => stickersData.value.data.stickers.leng
 <style>
 body {
     margin: 0px;
-    /* overflow-x: hidden; */
+    overflow-x: hidden;
 }
 </style>
