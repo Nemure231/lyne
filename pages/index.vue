@@ -115,3 +115,10 @@ provide('lengthStickersProvideData', () => stickersData.value.data.stickers.leng
         <BaseFooter />
     </div>
 </template>
+
+<style>
+body {
+    margin: 0px;
+    /* overflow-x: hidden; */
+}
+</style>
