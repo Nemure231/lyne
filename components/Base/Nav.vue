@@ -18,7 +18,7 @@ const childFec = () => {
             bg-green-500>
 
             <span font-bold lg:text-3xl md:text-3xl text-lg font-sans>
-                Lyn
+                Lyne
              
             </span>
             <form @submit.prevent="childFec()" lg:hidden md:hidden flex justify-end flex-row flex-wrap lg:mr-6 md:mr-6 mr-4

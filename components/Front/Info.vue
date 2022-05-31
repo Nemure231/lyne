@@ -12,7 +12,7 @@ const loadingSticker = inject('loadingStickersProvideData');
         <template v-if="stickersStatus().status === 0">
             <div>
                 <div class="lg:-mt-8 md:-mt-8 -mt-0">
-                    <h1 text-center text-8xl text-green-500 font-bold font-sans>Lyn</h1>
+                    <h1 text-center text-8xl text-green-500 font-bold font-sans>Lyne</h1>
                     <h2 class="-mt-6" text-center text-3xl font-semibold font-sans>
                         Line Sticker Downloader
                     </h2>
