@@ -90,7 +90,7 @@ let fec = async (link: string) => {
                 retry: 2
             });
             stickersData.value = response
-            console.log(response)
+            // console.log(response)
         }
 
         setTimeout(async () => {
