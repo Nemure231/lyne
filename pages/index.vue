@@ -85,7 +85,8 @@ let fec = async (link: string) => {
             searchData.value.link = ''
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
-            const response = await $fetch(`/api/sticker/${id}/${reg}`,{
+            //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
+            const response = await $fetch(`https://linesticker-scrap.herokuapp.com/${id}/${reg}`,{
                 retry: 2
             });
             stickersData.value = response
