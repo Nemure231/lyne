@@ -1,15 +1,12 @@
 <script setup lang="ts">
-
-import fileSaver from 'file-saver';
-
+import { saveAs } from 'file-saver';
 import JSZip from 'jszip'
 
-
-const stickersInfo = inject('stickersInfoProvideData');
-const stickersStatus = inject('stickersStatusProvideData');
-const stickersList = inject('stickersListProvideData');
-const loadingSticker = inject('loadingStickersProvideData');
-const lengthSticker = inject('lengthStickersProvideData')
+const stickersInfo:any = inject('stickersInfoProvideData');
+const stickersStatus:any = inject('stickersStatusProvideData');
+const stickersList:any = inject('stickersListProvideData');
+const loadingSticker:any = inject('loadingStickersProvideData');
+const lengthSticker:any = inject('lengthStickersProvideData')
 
 const list = ref([]);
 const stickerList = ref([]);
@@ -17,7 +14,7 @@ const stickerList = ref([]);
 let downloadImg = async () => {
     var count = 0;
 
-    stickersList().forEach((el: { staticUrl: string; }) => {
+    stickersList().forEach((el: { staticUrl: any; }) => {
         list.value.push(el.staticUrl);
     });
 
@@ -45,7 +42,7 @@ let downloadImg = async () => {
                     type: "blob"
                 })
                 .then(function (content) {
-                    fileSaver.saveAs(content, `Lyn_${stickersInfo().title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
+                    saveAs(content, `Lyn_${stickersInfo().title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
                     stickerList.value = []
                 });
             }
