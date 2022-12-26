@@ -4,7 +4,7 @@ interface propsInter {
 }
 const props = defineProps<propsInter>();
 
-const emitChildFec = defineEmits(["childFec"]);
+const emitChildFec = defineEmits(["childFec", "update:model"]);
 
 const childFec = () => {
     emitChildFec("childFec", props.searchPropsData)
@@ -14,6 +14,15 @@ const input = ref();
 onMounted(() => {
     input.value.focus()
 })
+
+
+const model =  computed({
+    get: () =>  props.searchPropsData,
+    set: (val) => {
+        emitChildFec('update:model', val)
+    }
+})
+
 </script>
 
 
@@ -29,7 +38,7 @@ onMounted(() => {
             <div flex-none>
                 <form @submit.prevent="childFec()" lg:hidden md:hidden flex justify-center flex-row flex-wrap lg:mr-6 md:mr-6 mr-6
                     items-center gap-1>
-                    <input ref="input" v-model="searchPropsData" shadow-lg focus:outline-none border-none text-xs sm:w-80 w-37 rounded-3xl px-3 type="text" class="py-2.5" 
+                    <input ref="input" v-model="model" shadow-lg focus:outline-none border-none text-xs sm:w-80 w-37 rounded-3xl px-3 type="text" class="py-2.5" 
                     placeholder="Link sticker ...."/>
     
                     <button type="submit" hover:bg-gray-200 shadow-lg inline-flex lg:justify-center md:justify-center

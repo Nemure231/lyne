@@ -6,18 +6,28 @@ interface propsInter {
 }
 
 const props = defineProps<propsInter>();
+const input = ref();
+
+onMounted(() => {
+    input.value.focus()
+})
 
 
-const emitChildFec = defineEmits(["childFec"]);
+const emitChildFec = defineEmits(["childFec", "update:model"]);
 
 const childFec = () => {
     emitChildFec("childFec", props.searchPropsData)
 }
 
-const input = ref();
-onMounted(() => {
-    input.value.focus()
+
+const model =  computed({
+    get: () =>  props.searchPropsData,
+    set: (val) => {
+        emitChildFec('update:model', val)
+    }
 })
+
+
 </script>
 <template>
     <main flex-1 z-10 lg:overflow-x-visible md:overflow-x-visible overflow-x-hidden>
@@ -31,7 +41,7 @@ onMounted(() => {
                             items-center gap-3 mr-4>
     
     
-                            <input ref="input" v-model="searchPropsData" shadow-lg focus:outline-none border-3 border-green-500
+                            <input ref="input" v-model="model" shadow-lg focus:outline-none border-3 border-green-500
                                 xl:text-lg text-base xl:w-96 lg:w-80 md:w-90 w-72 rounded-3xl px-3 xl:py-3 py-3 type="text"
                                 placeholder="Link sticker ...." />
     

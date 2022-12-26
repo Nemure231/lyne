@@ -1,22 +1,25 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "build": "nuxi build",
+    "dev": "nuxi dev",
+    "start": "node .output/server/index.mjs",
+    "lint": "eslint .",
+    "postinstall": "nuxi prepare",
+    "generate": "nuxi generate"
   },
   "devDependencies": {
-    "@unocss/nuxt": "^0.34.1",
-    "@unocss/preset-attributify": "^0.34.1",
-    "@unocss/preset-uno": "^0.34.1",
-    "@vueuse/core": "^8.5.0",
-    "@vueuse/nuxt": "^8.5.0",
-    "nuxt": "3.0.0-rc.3"
+    "@unocss/nuxt": "^0.48.0",
+    "@unocss/preset-attributify": "^0.48.0",
+    "@unocss/preset-uno": "^0.48.0",
+    "@vueuse/core": "^9.9.0",
+    "@vueuse/nuxt": "^9.9.0",
+    "nuxt": "^3.0.0"
   },
   "dependencies": {
-    "@vueuse/components": "^8.5.0",
+    "@vueuse/components": "^9.9.0",
     "file-saver": "^2.0.5",
-    "jszip": "^3.10.0"
+    "jszip": "^3.10.1",
+    "puppeteer": "^19.4.1"
   }
 }
