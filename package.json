@@ -9,13 +9,14 @@
     "generate": "nuxi generate"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.5",
     "@unocss/nuxt": "^0.48.0",
     "@unocss/preset-attributify": "^0.48.0",
     "@unocss/preset-uno": "^0.48.0",
     "@vueuse/core": "^9.9.0",
     "@vueuse/nuxt": "^9.9.0",
-    "nuxt": "^3.0.0",
-    "file-saver": "^2.0.5"
+    "file-saver": "^2.0.5",
+    "nuxt": "^3.0.0"
   },
   "dependencies": {
     "@vueuse/components": "^9.9.0",
