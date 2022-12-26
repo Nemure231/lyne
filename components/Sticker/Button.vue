@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { saveAs } from 'file-saver-es';
+import { saveAs } from 'file-saver';
 import JSZip from 'jszip'
 
 const stickersInfo:any = inject('stickersInfoProvideData');
@@ -14,7 +14,7 @@ const stickerList = ref([]);
 let downloadImg = async () => {
     var count = 0;
 
-    stickersList().forEach((el: { staticUrl: any; }) => {
+    stickersList().forEach((el: { staticUrl: any }) => {
         list.value.push(el.staticUrl);
     });
 
