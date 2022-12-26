@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { saveAs } from 'file-saver';
+
+import fileSaver from 'file-saver';
+
 import JSZip from 'jszip'
+
 
 const stickersInfo = inject('stickersInfoProvideData');
 const stickersStatus = inject('stickersStatusProvideData');
@@ -42,7 +45,7 @@ let downloadImg = async () => {
                     type: "blob"
                 })
                 .then(function (content) {
-                    saveAs(content, `Lyn_${stickersInfo().title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
+                    fileSaver.saveAs(content, `Lyn_${stickersInfo().title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
                     stickerList.value = []
                 });
             }
