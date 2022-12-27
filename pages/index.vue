@@ -86,7 +86,7 @@ let fec = async (link: string) => {
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
             //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
-            const response = await $fetch(`/api/scrap?id=${id}&region=${reg}`, {
+            const response = await $fetch(`http://localhost:8888/.netlify/functions/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
 
