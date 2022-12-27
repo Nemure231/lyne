@@ -86,12 +86,8 @@ let fec = async (link: string) => {
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
             //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
-            const response = await $fetch(`/api/scrap`, {
-                retry: 2,
-                query: {
-                    id: id,
-                    region: reg
-                }
+            const response = await $fetch(`/api/scrap?id=${id}&region=${reg}`, {
+                retry: 2
             });
 
             stickersData.value = response

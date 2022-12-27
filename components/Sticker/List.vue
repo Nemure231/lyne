@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
-import { saveAs } from 'file-saver-es';
+import { saveAs } from 'file-saver';
 const stickersStatus:any = inject('stickersStatusProvideData');
 const stickersList:any = inject('stickersListProvideData');
 const loadingSticker:any = inject('loadingStickersProvideData');

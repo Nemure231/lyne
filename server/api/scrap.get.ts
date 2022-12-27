@@ -1,22 +1,26 @@
 
-import { getQuery } from 'ufo'
+// import { getQuery } from 'ufo'
 
 import puppeteer from 'puppeteer';
 
 
-export default defineEventHandler(async (event) => {
+export default async (req, res) => {
+
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
 
-    const req: any = getQuery(event.req.url as string)
+    const id: any = req.url.split('=')[1].replace('&region', ' ')
+    const region: any = req.url.split('=')[2]
 
     const page = await browser.newPage();
-    await page.goto(`https://store.line.me/stickershop/product/${req.id}/${req.region}`)
+    await page.goto(`https://store.line.me/stickershop/product/${Number(id)}/${region}`)
     const data = await page.evaluate(() => {
         const list = []
         const pag = document.title
+        
+
         if (pag !== 'LINE STORE') {
             const checkClass:any = document.querySelector('.LyMain')?.classList.length;
 
@@ -66,7 +70,7 @@ export default defineEventHandler(async (event) => {
             title: title,
             icon: icon.replace(';compress=true', ''),
             desc: desc,
-            url: `https://store.line.me/stickershop/product/${req.id}/${req.region}`,
+            url: `https://store.line.me/stickershop/product/${id}/${region}`,
             stickers: data[0].stickers
         }
     }
@@ -74,7 +78,8 @@ export default defineEventHandler(async (event) => {
 
     return data_json
 
-})
+
+}
 
 
 

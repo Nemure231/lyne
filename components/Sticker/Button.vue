@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { saveAs } from 'file-saver-es';
 import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 
 const stickersInfo:any = inject('stickersInfoProvideData');
 const stickersStatus:any = inject('stickersStatusProvideData');
