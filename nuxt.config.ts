@@ -12,4 +12,9 @@ export default defineNuxtConfig({
         shortcuts: [],
         rules: [],
     },
+    runtimeConfig: {
+        public: {
+            api_netlify_function: process.env.API_NETLIFY_FUNCTION,
+        }
+    },
 })

@@ -55,6 +55,7 @@ const searchData = ref<SearchSticker>({
     link: '',
 });
 
+
 const loadingData = ref<boolean>();
 
 let checkUrlImg = (url: string) => {
@@ -64,6 +65,8 @@ let checkUrlImg = (url: string) => {
         return false
     }
 }
+
+const config = useRuntimeConfig()
 
 const loadImgTime = ref<number>(0)
 
@@ -86,7 +89,7 @@ let fec = async (link: string) => {
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
             //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
-            const response = await $fetch(`http://localhost:8888/.netlify/functions/scrap?id=${id}&region=${reg}`, {
+            const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
 
