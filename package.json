@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxi build node node_modules/puppeteer/install.js",
+    "build": "nuxi build && node node_modules/puppeteer/install.js",
     "dev": "nuxi dev",
     "generate": "nuxi generate",
     "preview": "nuxi preview"
