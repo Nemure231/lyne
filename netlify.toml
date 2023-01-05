@@ -5,12 +5,9 @@
 [build]
   functions = "functions/"
   publish = "dist"
-  command = "npm run build"
+  command = "npm run install && npm run build"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[functions]
-  external_node_modules = ["chrome-aws-lambda"]
