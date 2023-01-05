@@ -28,7 +28,7 @@ interface SearchSticker {
     link?: string;
 }
 
-const stickersData = ref<Sticker>({
+const stickersData: any = ref<Sticker>({
     success: false,
     message: '',
     status: 0,
@@ -55,9 +55,10 @@ const searchData = ref<SearchSticker>({
     link: '',
 });
 
+
 const loadingData = ref<boolean>();
 
-let checkUrlImg = (url) => {
+let checkUrlImg = (url: string) => {
     if (url.match(/^https:?:\/\/.+\/.+$/)) {
         return true
     } else {
@@ -65,11 +66,12 @@ let checkUrlImg = (url) => {
     }
 }
 
-const loadImgTime = ref<number>(0)
 const config = useRuntimeConfig()
 
+const loadImgTime = ref<number>(0)
+
 let fec = async (link: string) => {
-    
+
     let id: number = Number(link.split('/')[5]);
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
@@ -90,8 +92,8 @@ let fec = async (link: string) => {
             const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
+
             stickersData.value = response
-            // console.log(response)
         }
 
         setTimeout(async () => {
@@ -103,53 +105,59 @@ let fec = async (link: string) => {
     }
 }
 
-provide('stickersListProvideData', () => stickersData.value.data.stickers);
+provide('stickersListProvideData', () => stickersData.value.data?.stickers);
 provide('stickersInfoProvideData', () => stickersData.value.data);
 provide('stickersStatusProvideData', () => stickersData.value);
 
 provide('loadingStickersProvideData', () => loadingData.value);
-provide('lengthStickersProvideData', () => stickersData.value.data.stickers.length);
+provide('lengthStickersProvideData', () => stickersData.value.data?.stickers.length);
 
 
 useHead({
     title: 'Lyne',
-    viewport: 'width=device-width, initial-scale=1.0',
-    charset: 'utf-8',
     meta: [
-        { 
-            name: 'description', 
-            content: 'Line stickers downloader' 
+        {
+            name: 'charset',
+            content: 'utf-8',
         },
-        { 
-            name: 'keywords', 
-            content: 'downloader, download, scrap, image, ' 
+        {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1.0',
         },
-        { 
-            name: 'author', 
-            content: 'Karol.Y' 
+        {
+            name: 'description',
+            content: 'Line stickers downloader'
         },
-        { 
-            name: 'theme-color', 
-            content: '#1f1f1f' 
+        {
+            name: 'keywords',
+            content: 'downloader, download, scrap, image, '
         },
-        { 
-            property: 'og:type', 
-            content: 'website' 
+        {
+            name: 'author',
+            content: 'Karol.Y'
+        },
+        {
+            name: 'theme-color',
+            content: '#1f1f1f'
+        },
+        {
+            property: 'og:type',
+            content: 'website'
         },
         {
             name: 'twitter:card',
             content: 'summary_large_image'
         },
         {
-            property: 'og:site_name', 
+            property: 'og:site_name',
             content: 'Lyne'
         },
         {
-            property:'og:title',
+            property: 'og:title',
             content: 'Lyne'
         },
         {
-            property: 'og:url', 
+            property: 'og:url',
             content: 'https://lyne.netlify.app/'
         },
         {
@@ -179,10 +187,12 @@ useHead({
 </script>
 
 <template>
-    <div bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible md:overflow-x-visible overflow-x-hidden>
-        <BaseNav @childFec="(event) => fec(event)" :searchPropsData="searchData.link" />
+    <div bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
+        md:overflow-x-visible overflow-x-hidden>
+        <BaseNav @update:model="searchData.link = $event" @childFec="(event) => fec(event)"
+            :searchPropsData="searchData.link" />
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
-            :lengthPropsData="stickersData.data.stickers.length" />
+            :lengthPropsData="stickersData.data?.stickers.length" @update:model="searchData.link = $event" />
         <BaseFooter />
     </div>
 </template>

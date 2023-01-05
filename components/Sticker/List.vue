@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
 import { saveAs } from 'file-saver';
-const stickersStatus = inject('stickersStatusProvideData');
-const stickersList = inject('stickersListProvideData');
-const loadingSticker = inject('loadingStickersProvideData');
-const lengthSticker = inject('lengthStickersProvideData')
+const stickersStatus:any = inject('stickersStatusProvideData');
+const stickersList:any = inject('stickersListProvideData');
+const loadingSticker:any = inject('loadingStickersProvideData');
+const lengthSticker:any = inject('lengthStickersProvideData')
 
 const focusScale = ref(0);
-const defaultLoop = ref<number>(1);
 
 let downloadOneImg = async (eve: string, id: number) => {
     await fetch(eve)
