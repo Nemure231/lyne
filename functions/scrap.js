@@ -6,6 +6,7 @@ exports.handler = async (event, context) => {
     const { id = 0, region = '' } = event.queryStringParameters;
 
     const browser = await puppeteer.launch({
+        executablePath: "/usr/bin/chromium-browser",
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
