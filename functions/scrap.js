@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
-import chromium from 'chrome-aws-lambda'
+// import chromium from 'chrome-aws-lambda'
+const chromium = require('chrome-aws-lambda')
 
 exports.handler = async (event, context) => {
     const { id = 0, region = '' } = event.queryStringParameters;
