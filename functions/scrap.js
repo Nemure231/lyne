@@ -6,9 +6,9 @@ exports.handler = async (event, context) => {
     const { id = 0, region = '' } = event.queryStringParameters;
 
     const browser = await puppeteer.launch({
-        executablePath: "/usr/bin/chromium-browser",
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        ignoreDefaultArgs: ['--disable-extensions']
     })
 
     // const executablePath = await chromium.executablePath
