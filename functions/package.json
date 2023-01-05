@@ -1,6 +1,0 @@
-{
-  "private": true,
-  "dependencies": {
-    "chrome-aws-lambda": "^10.1.0"
-  }
-}

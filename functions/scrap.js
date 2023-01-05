@@ -1,22 +1,22 @@
 import puppeteer from 'puppeteer';
 // import chromium from 'chrome-aws-lambda'
-const chromium = require('chrome-aws-lambda')
+// const chromium = require('chrome-aws-lambda')
 
 exports.handler = async (event, context) => {
     const { id = 0, region = '' } = event.queryStringParameters;
 
-    // const browser = await puppeteer.launch({
-    //     headless: true,
-    //     args: ['--no-sandbox', '--disable-setuid-sandbox']
-    // })
-
-    const executablePath = await chromium.executablePath
-
     const browser = await puppeteer.launch({
-        args: chromium.args,
-        executablePath: executablePath,
-        headless: chromium.headless,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
     })
+
+    // const executablePath = await chromium.executablePath
+
+    // const browser = await puppeteer.launch({
+    //     args: chromium.args,
+    //     executablePath: executablePath,
+    //     headless: chromium.headless,
+    // })
 
     const page = await browser.newPage();
     await page.goto(`https://store.line.me/stickershop/product/${Number(id)}/${region}`)
