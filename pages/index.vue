@@ -66,6 +66,7 @@ let checkUrlImg = (url) => {
 }
 
 const loadImgTime = ref<number>(0)
+const config = useRuntimeConfig()
 
 let fec = async (link: string) => {
     
@@ -86,7 +87,7 @@ let fec = async (link: string) => {
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
             //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
-            const response = await $fetch(`https://linesticker-scrap.herokuapp.com/${id}/${reg}`,{
+            const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
             stickersData.value = response
