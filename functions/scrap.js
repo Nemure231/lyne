@@ -1,5 +1,5 @@
 const chromium = require('chrome-aws-lambda')
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 
 exports.handler = async (event, context, callback) => {
   let theTitle = null
