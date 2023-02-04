@@ -47,7 +47,7 @@ const stickersData = ref<Sticker>({
 });
 
 const searchData = ref<string>('');
-const stickerList = ref()
+const stickerList = ref([])
 
 const loadingData = ref<boolean>(false);
 
@@ -85,7 +85,10 @@ let fec = async (link: string) => {
             });
 
             stickersData.value = response
-            stickerList.value = response.data?.stickers
+
+            response.data.stickers?.forEach(element => {
+                stickerList.value.push(element)
+            });
 
             loadingData.value = false
         }
