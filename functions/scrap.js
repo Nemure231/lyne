@@ -1,156 +1,75 @@
-const chromium = require('chrome-aws-lambda')
-const puppeteer = require('puppeteer-core')
+const cheerio = require('cheerio');
+const axios = require("axios");
 
 exports.handler = async (event, context, callback) => {
-  let theTitle = null
-  let browser = null
-  console.log('spawning chrome headless')
-  try {
-    const executablePath = await chromium.executablePath
 
-    // setup
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: executablePath,
-      headless: chromium.headless,
-    })
+  const { id = 0, region = '' } = event.queryStringParameters;
 
-    // Do stuff with headless chrome
-    const page = await browser.newPage()
-    const targetUrl = 'https://davidwells.io'
+  const url = `https://store.line.me/stickershop/product/${id}/${region}`;
 
-    // Goto page and then do stuff
-    await page.goto(targetUrl, {
-      waitUntil: ["domcontentloaded", "networkidle0"]
-    })
+  const { data } = await axios.get(url);
 
-    await page.waitForSelector('#phenomic')
+  const $ = cheerio.load(data);
 
-    theTitle = await page.title();
+  const list = []
 
-    console.log('done on page', theTitle)
+  const title = $('title').text()
 
-  } catch (error) {
-    console.log('error', error)
-    return callback(null, {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: error
+  const splitTitle = title.split('|')
+
+  const checkTitle = splitTitle[1].trim()
+
+  if (checkTitle == 'LINE STORE') {
+
+    const checkClass = $(".LyMain");
+    if (checkClass.length <= 1) {
+
+      const store = []
+
+      $(".FnStickerList li").each(function (i, elm) {
+        const data_sticker = $(this).data('preview');
+        store.push(data_sticker);
+      });
+
+      list.push({
+        success: true,
+        statusCode: 200,
+        message: 'The sticker has been found!',
+        stickers: store
       })
-    })
-  } finally {
-    // close browser
-    if (browser !== null) {
-      await browser.close()
+
+    } else {
+      list.push({
+        success: false,
+        statusCode: 204,
+        message: 'This sticker is default sticker or expired sticker!',
+        stickers: [{}]
+      })
     }
+  } else {
+    list.push({
+      success: false,
+      statusCode: 404,
+      message: 'This sticker not found!',
+      stickers: [{}]
+    })
   }
+
+  const icon = $('[property="og:image"]').attr('content').replace(';compress=true', '');
+  const desc = $('[name="description"]').attr('content');
 
   return callback(null, {
     statusCode: 200,
     body: JSON.stringify({
-      title: theTitle,
+      success: list[0].success,
+      message: list[0].message,
+      data: {
+        title: title,
+        icon: icon,
+        desc: desc,
+        url: url,
+        stickers: list[0].stickers
+      }
     })
   })
 }
-
-
-
-
-
-
-
-
-
-
-// import puppeteer from 'puppeteer';
-// // import chromium from 'chrome-aws-lambda'
-// // const chromium = require('chrome-aws-lambda')
-
-// exports.handler = async (event, context) => {
-//     const { id = 0, region = '' } = event.queryStringParameters;
-
-//     const browser = await puppeteer.launch({
-//         headless: true,
-//         args: ['--no-sandbox', '--disable-setuid-sandbox'],
-//         ignoreDefaultArgs: ['--disable-extensions']
-//     })
-
-//     // const executablePath = await chromium.executablePath
-
-//     // const browser = await puppeteer.launch({
-//     //     args: chromium.args,
-//     //     executablePath: executablePath,
-//     //     headless: chromium.headless,
-//     // })
-
-//     const page = await browser.newPage();
-//     await page.goto(`https://store.line.me/stickershop/product/${Number(id)}/${region}`)
-//     const data = await page.evaluate(() => {
-//         const list = []
-//         const pag = document.title
-
-
-//         if (pag !== 'LINE STORE') {
-//             const checkClass = document.querySelector('.LyMain')?.classList.length;
-
-
-//             if (checkClass <= 1) {
-//                 const items = document.querySelector('.FnStickerList')?.getElementsByTagName("li")
-//                 const store = []
-//                 for (let index = 0; index < items.length; index++) {
-//                     const data_sticker = items[index].dataset.preview
-//                     store.push(
-//                         JSON.parse(data_sticker.substring(data_sticker.indexOf('{'), data_sticker.lastIndexOf('}') + 1))
-//                     );
-//                 }
-//                 list.push({
-//                     success: true,
-//                     statusCode: 200,
-//                     message: 'The sticker has been found!',
-//                     stickers: store
-//                 })
-//             } else {
-//                 list.push({
-//                     success: false,
-//                     statusCode: 204,
-//                     message: 'This sticker is default sticker or expired sticker!',
-//                     stickers: [{}]
-//                 })
-//             }
-//         } else {
-//             list.push({
-//                 success: false,
-//                 statusCode: 404,
-//                 message: 'This sticker not found!',
-//                 stickers: [{}]
-//             })
-//         }
-//         return list
-
-//     })
-
-//     const title = await page.title();
-//     const icon = await page.$eval("head > meta[property='og:image']", element => element.content);
-//     const desc = await page.$eval("head > meta[name='description']", element => element.content);
-//     const data_json = {
-//         statusCode: 200,
-//         body: JSON.stringify({
-//             success: data[0].success,
-//             message: data[0].message,
-//             data: {
-//                 title: title,
-//                 icon: icon.replace(';compress=true', ''),
-//                 desc: desc,
-//                 url: `https://store.line.me/stickershop/product/${id}/${region}`,
-//                 stickers: data[0].stickers
-
-//             }
-//         })
-//     }
-//     await browser.close();
-
-//     return data_json
-
-
-
-// };

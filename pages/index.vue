@@ -81,14 +81,12 @@ let fec = async (link: string) => {
     if (checkUrlType === true) {
         if (typeof id != "number" || id === 0 || isNaN(id)) {
             alert(`The url doesn't have id of sticker line!`);
-
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
             alert(`The url doesn't have region of sticker line!`)
         } else {
             searchData.value.link = ''
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
-            //  const response = await $fetch(`/api/sticker/${id}/${reg}`,{
             const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
