@@ -1,5 +1,5 @@
 
-<script setup lang="ts">
+<script setup>
 
 // interface Sticker {
 //     success: boolean;
@@ -22,7 +22,7 @@
 //     }
 // }
 
-const stickersData: any = ref({
+const stickersData = ref({
     success: false,
     message: '',
     status: 0,
@@ -47,12 +47,11 @@ const stickersData: any = ref({
 
 const listSticker = ref()
 
-const searchData = ref<string>('');
+const searchData = ref('');
 
+const loadingData = ref(false);
 
-const loadingData = ref<boolean>();
-
-let checkUrlImg = (url: string) => {
+let checkUrlImg = (url) => {
     if (url.match(/^https:?:\/\/.+\/.+$/)) {
         return true
     } else {
@@ -62,12 +61,11 @@ let checkUrlImg = (url: string) => {
 
 const config = useRuntimeConfig()
 
-const loadImgTime = ref<number>(0)
 
-let fec = async (link: string) => {
+let fec = async (link) => {
 
-    let id: number = Number(link.split('/')[5]);
-    let reg: string = link.split('/')[6];
+    let id = Number(link.split('/')[5]);
+    let reg = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
 
 
@@ -79,7 +77,7 @@ let fec = async (link: string) => {
         } else {
             searchData.value = ''
             loadingData.value = true
-            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
+            const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
             if (response.success) {
                 stickersData.value = response
