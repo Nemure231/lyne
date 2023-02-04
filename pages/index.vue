@@ -79,12 +79,12 @@ let fec = async (link: string) => {
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
             alert(`The url doesn't have region of sticker line!`)
         } else {
-            stickersData.value = {}
             searchData.value = ''
             loadingData.value = true
             const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
+
             stickersData.value = response
         }
 
@@ -187,7 +187,7 @@ useHead({
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
 
-        {{ stickersData.data?.stickers }}
+        {{ stickersData.data.stickers }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
