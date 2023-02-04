@@ -1,28 +1,28 @@
 
 <script setup lang="ts">
 
-interface Sticker {
-    success: boolean;
-    message: string;
-    status: number,
-    data: {
-        title: string,
-        icon: string,
-        desc: string,
-        url: string,
-        stickers: {
-            type: string,
-            id: number,
-            staticUrl: string,
-            fallbackStaticUrl: string,
-            animationUrl: string,
-            popUrl: string,
-            soundUrl: string,
-        }[]
-    }
-}
+// interface Sticker {
+//     success: boolean;
+//     message: string;
+//     status: number,
+//     data: {
+//         title: string,
+//         icon: string,
+//         desc: string,
+//         url: string,
+//         stickers: {
+//             type: string,
+//             id: number,
+//             staticUrl: string,
+//             fallbackStaticUrl: string,
+//             animationUrl: string,
+//             popUrl: string,
+//             soundUrl: string,
+//         }[]
+//     }
+// }
 
-const stickersData: any = ref<Sticker>({
+const stickersData: any = ref({
     success: false,
     message: '',
     status: 0,
