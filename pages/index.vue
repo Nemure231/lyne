@@ -81,13 +81,20 @@ let fec = async (link: string) => {
         } else {
             searchData.value = ''
 
-            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
+            // const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            response.stickers?.forEach(element => {
-                stickerList.value.push(element)
-            });
+            await fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`)
+                .then((response) => response.json())
+                .then((data) => {
 
-            stickersData.value = response
+                    data.stickers?.forEach(element => {
+                        stickerList.value.push(element)
+                    });
+
+                    stickersData.value = data
+
+                });
+
             loadingData.value = false
 
         }
