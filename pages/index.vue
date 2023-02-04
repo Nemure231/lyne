@@ -59,8 +59,6 @@ let checkUrlImg = (url: string) => {
 
 const config = useRuntimeConfig()
 
-const loadImgTime = ref<number>(0)
-
 let fec = async (link: string) => {
 
     let id: number = Number(link.split('/')[5]);
@@ -94,14 +92,6 @@ provide('stickersProvideData', computed({
         stickersData.value = val
     }
 }))
-
-
-// provide('stickersListProv', computed({
-//     get: () => stickersData.value.data.stickers,
-//     set: (val) => {
-//         stickersData.value.data.stickers = val
-//     }
-// }))
 
 
 provide('loadingStickersProvideData', computed({
@@ -188,13 +178,7 @@ useHead({
 <template>
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
-
-        <div v-if="stickersData.data?.stickers?.length > 1">
-
-            {{ stickersData.data.stickers}}
-        </div>
-
-
+        {{ stickersData.data.stickers}}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
