@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+import axios from 'axios';
 
 interface Sticker {
     success: boolean;
@@ -65,6 +66,7 @@ let fec = async (link: string) => {
     let id: number = Number(link.split('/')[5]);
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
+    loadingData.value = true
 
 
     if (checkUrlType == true) {
@@ -74,12 +76,15 @@ let fec = async (link: string) => {
             alert(`The url doesn't have region of sticker line!`)
         } else {
             searchData.value = ''
-            loadingData.value = true
-            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
+            const response: any = await $fetch(`/api/scrap`, {
+                params: {
+                    id: id,
+                    region: reg
+                }
+            });
 
             stickersData.value = response
-            await nextTick()
             stickerList.value = response.data.stickers
 
             loadingData.value = false
