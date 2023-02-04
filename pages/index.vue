@@ -77,11 +77,13 @@ let fec = async (link: string) => {
             loadingData.value = true
             const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            setTimeout(() => {
+
+            if (response.status) {
                 loadingData.value = false
                 stickersData.value = response
+                await nextTick()
                 stickerList.value = response.data.stickers
-            }, 200);
+            }
 
         }
 
