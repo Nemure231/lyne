@@ -1,12 +1,38 @@
 
 <script setup lang="ts">
-import axios from 'axios';
+
+
+useHead({
+    title: 'Lyne',
+    meta: [
+        { name: 'charset', content: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
+        { name: 'description', content: 'Line stickers downloader' },
+        { name: 'keywords', content: 'downloader, download, scrap, image, ' },
+        { name: 'author', content: 'Karol.Y' },
+        { name: 'theme-color', content: '#1f1f1f' },
+        { property: 'og:type', content: 'website' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { property: 'og:site_name', content: 'Lyne' },
+        { property: 'og:title', content: 'Lyne' },
+        { property: 'og:url', content: 'https://lyne.netlify.app/' },
+        { property: 'og:description', content: 'Line stickers downloader' },
+        { property: 'og:image', content: '/img/logo/logo.png' },
+        { property: 'og:image:alt', content: 'Lyne' }
+    ],
+    link: [
+        { rel: 'icon', href: '/img/logo/favicon.ico' }
+    ],
+    bodyAttrs: {
+        class: 'mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative m-0 overflow-x-hidden'
+    }
+})
 
 interface Sticker {
-    success: boolean;
-    message: string;
-    status: number,
-    data: {
+    success?: boolean;
+    message?: string;
+    status?: number,
+    data?: {
         title: string,
         icon: string,
         desc: string,
@@ -23,31 +49,9 @@ interface Sticker {
     }
 }
 
-const stickersData = ref<Sticker>({
-    success: false,
-    message: '',
-    status: 0,
-    data: {
-        title: '',
-        icon: '',
-        desc: '',
-        url: '',
-        stickers: [
-            {
-                type: '',
-                id: 0,
-                staticUrl: '',
-                fallbackStaticUrl: '',
-                animationUrl: '',
-                popUrl: '',
-                soundUrl: '',
-            }
-        ]
-    }
-});
+const stickersData = ref<Sticker>({});
 
 const searchData = ref<string>('');
-const stickerList = ref([])
 
 const loadingData = ref<boolean>(false);
 
@@ -68,7 +72,6 @@ let fec = async (link: string) => {
     const checkUrlType = checkUrlImg(link);
     loadingData.value = true
 
-
     if (checkUrlType == true) {
         if (typeof id != "number" || id === 0 || isNaN(id)) {
             alert(`The url doesn't have id of sticker line!`);
@@ -77,22 +80,14 @@ let fec = async (link: string) => {
         } else {
             searchData.value = ''
 
-            const response: any = await $fetch(`/api/scrap`, {
-                params: {
-                    id: id,
-                    region: reg
-                }
-            });
+            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            stickersData.value = response
+            if (response.success) {
+                stickersData.value = response
+                loadingData.value = false
+            }
 
-            response.data?.stickers.forEach(element => {
-                stickerList.value.push(element)
-            });
-
-            loadingData.value = false
         }
-
 
     } else {
         alert('The url only accept https protocol!')
@@ -106,7 +101,6 @@ provide('stickersProvideData', computed({
     }
 }))
 
-
 provide('loadingStickersProvideData', computed({
     get: () => loadingData.value,
     set: (val) => {
@@ -114,84 +108,11 @@ provide('loadingStickersProvideData', computed({
     }
 }))
 
-
-useHead({
-    title: 'Lyne',
-    meta: [
-        {
-            name: 'charset',
-            content: 'utf-8',
-        },
-        {
-            name: 'viewport',
-            content: 'width=device-width, initial-scale=1.0',
-        },
-        {
-            name: 'description',
-            content: 'Line stickers downloader'
-        },
-        {
-            name: 'keywords',
-            content: 'downloader, download, scrap, image, '
-        },
-        {
-            name: 'author',
-            content: 'Karol.Y'
-        },
-        {
-            name: 'theme-color',
-            content: '#1f1f1f'
-        },
-        {
-            property: 'og:type',
-            content: 'website'
-        },
-        {
-            name: 'twitter:card',
-            content: 'summary_large_image'
-        },
-        {
-            property: 'og:site_name',
-            content: 'Lyne'
-        },
-        {
-            property: 'og:title',
-            content: 'Lyne'
-        },
-        {
-            property: 'og:url',
-            content: 'https://lyne.netlify.app/'
-        },
-        {
-            property: 'og:description',
-            content: 'Line stickers downloader'
-
-        },
-        {
-            property: 'og:image',
-            content: '/img/logo/logo.png'
-        },
-        {
-            property: 'og:image:alt',
-            content: 'Lyne'
-        }
-    ],
-    link: [
-        {
-            rel: 'icon',
-            href: '/img/logo/favicon.ico'
-        }
-    ],
-    bodyAttrs: {
-        class: 'mx-auto h-auto w-full flex flex-wrap flex-col justify-center relative m-0 overflow-x-hidden'
-    }
-})
 </script>
 
 <template>
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
-        {{ stickerList }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
