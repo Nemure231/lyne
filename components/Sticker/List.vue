@@ -3,7 +3,6 @@ import { OnClickOutside } from '@vueuse/components'
 import { saveAs } from 'file-saver';
 
 const item: any = inject('stickersProvideData');
-const list: any = inject('stickersListProv');
 const loadingSticker: any = inject('loadingStickersProvideData');
 
 const focusScale = ref(0);
@@ -23,7 +22,6 @@ let downloadOneImg = async (eve: string, id: number) => {
 
 <template>
     <ClientOnly>
-
         <div v-if="loadingSticker" class="flex flex-wrap lg:justify-start md:justify-start justify-center items-center flex-row gap-6 lg:mt-0 md:mt-0
                 mt-4">
             <div v-for="i in 10" class="animate-pulse hover:bg-green-400 bg-gray-300 rounded-md flex-none lg:w-40

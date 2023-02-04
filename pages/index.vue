@@ -83,7 +83,7 @@ let fec = async (link: string) => {
 
             stickersData.value = response
 
-            listSticker.value.push(response.data.stickers)
+            listSticker.value.push(response.data?.stickers)
         }
 
         loadingData.value = false
@@ -101,12 +101,12 @@ provide('stickersProvideData', computed({
 }))
 
 
-provide('stickersListProv', computed({
-    get: () => stickersData.value.data.stickers,
-    set: (val) => {
-        stickersData.value.data.stickers = val
-    }
-}))
+// provide('stickersListProv', computed({
+//     get: () => stickersData.value.data.stickers,
+//     set: (val) => {
+//         stickersData.value.data.stickers = val
+//     }
+// }))
 
 
 provide('loadingStickersProvideData', computed({
