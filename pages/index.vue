@@ -50,7 +50,6 @@ interface Sticker {
 }
 
 const stickersData = ref<Sticker>({});
-const stickerList = ref([])
 
 const searchData = ref<string>('');
 
@@ -71,25 +70,19 @@ let fec = async (link: string) => {
     let id: number = Number(link.split('/')[5]);
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
-    loadingData.value = true
-
+    
     if (checkUrlType == true) {
         if (typeof id != "number" || id === 0 || isNaN(id)) {
             alert(`The url doesn't have id of sticker line!`);
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
             alert(`The url doesn't have region of sticker line!`)
         } else {
+            loadingData.value = true
             searchData.value = ''
-
-            // const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
             await fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`)
                 .then((response) => response.json())
                 .then((data) => {
-
-                    data.stickers?.forEach(element => {
-                        stickerList.value.push(element)
-                    });
 
                     stickersData.value = data
 
@@ -124,7 +117,6 @@ provide('loadingStickersProvideData', computed({
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
 
-        {{ stickerList }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"

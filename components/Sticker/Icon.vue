@@ -16,7 +16,7 @@ const loadingSticker: any = inject('loadingStickersProvideData');
                 object-cover">
         </div>
         <template v-else>
-            <img v-if="item.data?.stickers?.length >= 2 || item.status === 200"
+            <img v-if="item.data?.stickers?.length > 0 || item.status === 200"
                 class="rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40 object-cover"
                 :src="item.data.icon" alt="">
         </template>

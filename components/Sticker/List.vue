@@ -31,7 +31,7 @@ let downloadOneImg = async (eve: string, id: number) => {
 
         <div v-if="!loadingSticker">
 
-            <OnClickOutside v-if="item.data?.stickers?.length > 2 && item.status == 200" @trigger="focusScale = 0">
+            <OnClickOutside v-if="item.data?.stickers?.length > 0 && item.status == 200" @trigger="focusScale = 0">
                 <div
                     class="flex flex-wrap lg:justify-start md:justify-start justify-center items-center flex-row gap-6 mt-4">
 
