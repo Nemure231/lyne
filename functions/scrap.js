@@ -15,6 +15,13 @@ exports.handler = async (event, context, callback) => {
                     status: 404,
                     success: false,
                     message: 'This sticker not found!',
+                    data: {
+                        title: '404',
+                        icon: 'https://static.line-scdn.net/line_store/185ec17b50d/pc/img/common/error_404.png',
+                        desc: 'Item not found.',
+                        url: url,
+                        stickers: [{}]
+                    }
                 })
             })
         })
@@ -30,7 +37,6 @@ exports.handler = async (event, context, callback) => {
 
     if (checkTitle == 'LINE STORE') {
 
-        const checkClass = $(".LyMain");
         const checkClass2 = $(".lyMainError");
 
         if (checkClass2.length == 0) {

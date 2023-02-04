@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-const stickersStatus:any = inject('stickersStatusProvideData');
+const stickersStatus: any = inject('stickersStatusProvideData');
 
-const loadingSticker:any = inject('loadingStickersProvideData');
+const loadingSticker: any = inject('loadingStickersProvideData');
 
 </script>
 
@@ -12,19 +12,19 @@ const loadingSticker:any = inject('loadingStickersProvideData');
         <template v-if="stickersStatus.status == 0">
             <div>
                 <div class="lg:-mt-8 md:-mt-8 -mt-0">
-                    <h1 text-center text-8xl text-green-500 font-bold font-sans>Lyne</h1>
-                    <h2 class="-mt-6" text-center text-3xl font-semibold font-sans>
+                    <h1 class="text-center text-8xl text-green-500 font-bold font-sans">Lyne</h1>
+                    <h2 class="-mt-6 text-center text-3xl font-semibold font-sans">
                         Line Sticker Downloader
                     </h2>
                 </div>
-                <div flex flex-nowrap flex-row items-center justify-center mx-auto xl:w-130 lg:w-130 md:w-96 w-64
-                    lg:gap-x-6 md:gap-x-6 gap-x-3 font-sans text-gray-600>
-                    <div flex-none>
-                        <div flex flex-col items-center>
+                <div class="flex flex-nowrap flex-row items-center justify-center mx-auto xl:w-130 lg:w-130 md:w-96 w-64
+                    lg:gap-x-6 md:gap-x-6 gap-x-3 font-sans text-gray-600">
+                    <div class="flex-none">
+                        <div class="flex flex-col items-center">
 
-                            <div relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
-                                border-green-500 inline-flex justify-center items-center>
-                                <svg lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5 xmlns="http://www.w3.org/2000/svg"
+                            <div class="relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
+                                border-green-500 inline-flex justify-center items-center">
+                                <svg class="lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 12 12">
                                     <path fill="#22c55e"
@@ -32,8 +32,8 @@ const loadingSticker:any = inject('loadingStickersProvideData');
                                     </path>
                                 </svg>
 
-                                <span absolute class="-bottom-6" text-center font-semibold lg:text-base md:text-base
-                                    text-xs>
+                                <span class="-bottom-6 absolute text-center font-semibold lg:text-base md:text-base
+                                    text-xs">
                                     Search
                                 </span>
 
@@ -41,15 +41,15 @@ const loadingSticker:any = inject('loadingStickersProvideData');
                         </div>
 
                     </div>
-                    <div flex-1>
-                        <div h-3 w-full bg-green-500 rounded-xl>
+                    <div class="flex-1">
+                        <div class="h-3 w-full bg-green-500 rounded-xl">
 
                         </div>
                     </div>
-                    <div flex-none>
-                        <div relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
-                            border-green-500 inline-flex justify-center items-center>
-                            <svg lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5 xmlns="http://www.w3.org/2000/svg"
+                    <div class="flex-none">
+                        <div class="relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
+                            border-green-500 inline-flex justify-center items-center">
+                            <svg class="lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                 <path fill="#22c55e"
@@ -57,30 +57,30 @@ const loadingSticker:any = inject('loadingStickersProvideData');
                                 </path>
                             </svg>
 
-                            <span absolute class="-bottom-6" text-center font-semibold lg:text-base md:text-base
-                                text-xs>
+                            <span class="-bottom-6 absolute text-center font-semibold lg:text-base md:text-base
+                                text-xs">
                                 Preview
                             </span>
 
                         </div>
 
                     </div>
-                    <div flex-1>
-                        <div h-3 w-full bg-green-500 rounded-xl>
+                    <div class="flex-1">
+                        <div class="h-3 w-full bg-green-500 rounded-xl">
                         </div>
                     </div>
-                    <div flex-none>
-                        <div relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
-                            border-green-500 inline-flex justify-center items-center>
-                            <svg lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5 xmlns="http://www.w3.org/2000/svg"
+                    <div class="flex-none">
+                        <div class="relative lg:w-12 lg:h-12 md:w-10 md:h-10 w-8 h-8 rounded-full bg-white border-2
+                            border-green-500 inline-flex justify-center items-center">
+                            <svg class="lg:w-6 lg:h-6 md:w-6 md:h-6 h-5 w-5" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
                                 <path fill="#22c55e"
                                     d="M8 2a.75.75 0 0 1 .75.75v8.787l2.941-3.287a.75.75 0 1 1 1.118 1L8.559 14a.75.75 0 0 1-1.118 0l-4.25-4.75a.75.75 0 1 1 1.118-1l2.941 3.287V2.75A.75.75 0 0 1 8 2Z">
                                 </path>
                             </svg>
-                            <span absolute class="-bottom-6" text-center font-semibold lg:text-base md:text-base
-                                text-xs>
+                            <span class="-bottom-6  absolute text-center font-semibold lg:text-base md:text-base
+                                text-xs">
                                 Download
                             </span>
 
