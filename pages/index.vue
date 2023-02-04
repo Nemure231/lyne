@@ -87,7 +87,7 @@ let fec = async (link: string) => {
             searchData.value.link = ''
             loadingData.value = true
             loadImgTime.value = new Date().getTime() - startLoadImgTime;
-            const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
+            const response = await $fetch(`${config.public.api_netlify_function}/scrap-cherrio?id=${id}&region=${reg}`, {
                 retry: 2
             });
 
