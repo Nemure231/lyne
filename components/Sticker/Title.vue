@@ -1,10 +1,8 @@
 <script setup lang="ts">
 
-const stickersInfo:any = inject('stickersInfoProvideData');
-const stickersStatus:any = inject('stickersStatusProvideData');
+const stickers: any = inject('stickersProvideData');
 
-const loadingSticker:any = inject('loadingStickersProvideData');
-const lengthSticker:any = inject('lengthStickersProvideData')
+const loadingSticker: any = inject('loadingStickersProvideData');
 
 
 </script>
@@ -17,9 +15,9 @@ const lengthSticker:any = inject('lengthStickersProvideData')
         </div>
     </template>
     <template v-else>
-        <template v-if="lengthSticker >= 2 || stickersStatus.status === 200">
+        <template v-if="stickers.data.stickers.length >= 2 || stickers.status === 200">
 
-            <span v-text="stickersInfo.title.replace('- Stiker LINE | LINE STORE', '')" class="lg:mt-0 md:mt-0 mt-3
+            <span v-text="stickers.data.title.replace('- Stiker LINE | LINE STORE', '')" class="lg:mt-0 md:mt-0 mt-3
                 lg:text-5xl md:text-5xl text-3xl font-bold">
 
             </span>

@@ -2,14 +2,14 @@
 
 <script setup lang="ts">
 
-const stickersStatus:any = inject('stickersStatusProvideData');
+const stickers:any = inject('stickersProvideData');
 
 const loadingSticker:any = inject('loadingStickersProvideData');
 
 </script>
 <template>
     <template v-if="!loadingSticker">
-        <template v-if="stickersStatus.status === 404">
+        <template v-if="stickers.status === 404">
             <div class="lg:-mt-10 md:-mt-10 -mt-0 flex justify-center items-center flex-col mx-auto">
                 <h1 class="text-center text-8xl text-red-500 font-bold font-sans">404</h1>
                 <h2 class="text-center text-3xl font-semibold font-sans lg:-mt-14 -mt-14">

@@ -1,10 +1,8 @@
 <script setup lang="ts">
 
-const stickersInfo:any = inject('stickersInfoProvideData');
-const stickersStatus:any = inject('stickersStatusProvideData');
+const stickers:any = inject('stickersProvideData');
 
 const loadingSticker:any = inject('loadingStickersProvideData');
-const lengthSticker:any = inject('lengthStickersProvideData')
 
 
 </script>
@@ -17,8 +15,8 @@ const lengthSticker:any = inject('lengthStickersProvideData')
             object-cover"></div>
     </template>
     <template v-else>
-        <template v-if="lengthSticker >= 2 || stickersStatus.status === 200">
-            <img class="rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40 object-cover" :src="stickersInfo.icon"
+        <template v-if="stickers.data.stickers.length >= 2 || stickers.status === 200">
+            <img class="rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40 object-cover" :src="stickers.data.icon"
                 alt="">
         </template>
     </template>

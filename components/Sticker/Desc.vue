@@ -1,10 +1,8 @@
 <script setup lang="ts">
 
-const stickersStatus: any = inject('stickersStatusProvideData');
+const stickers: any = inject('stickersProvideData');
 
 const loadingSticker: any = inject('loadingStickersProvideData');
-const lengthSticker: any = inject('lengthStickersProvideData')
-const stickersInfo: any = inject('stickersInfoProvideData');
 </script>
 
 
@@ -28,8 +26,8 @@ const stickersInfo: any = inject('stickersInfoProvideData');
         </p>
     </template>
     <template v-else>
-        <template v-if="lengthSticker >= 2 || stickersStatus.status === 200">
-            <p v-text="stickersInfo.desc" class="lg:text-lg md:text-lg text-base text-justify text-gray-600">
+        <template v-if="stickers.data.stickers.length>= 2 || stickers.status === 200">
+            <p v-text="stickers.data.desc" class="lg:text-lg md:text-lg text-base text-justify text-gray-600">
 
             </p>
         </template>

@@ -92,6 +92,7 @@ let fec = async (link: string) => {
             });
 
             stickersData.value = response
+
         }
 
         setTimeout(async () => {
@@ -103,10 +104,10 @@ let fec = async (link: string) => {
     }
 }
 
-provide('stickersListProvideData', computed({
-    get: () => stickersData.value.data?.stickers,
+provide('stickersProvideData', computed({
+    get: () => stickersData.value,
     set: (val) => {
-        stickersData.value.data.stickers = val
+        stickersData.value = val
     }
 }))
 
@@ -117,12 +118,12 @@ provide('stickersInfoProvideData', computed({
     }
 }))
 
-provide('stickersStatusProvideData', computed({
-    get: () => stickersData.value,
-    set: (val) => {
-        stickersData.value = val
-    }
-}))
+// provide('stickersStatusProvideData', computed({
+//     get: () => stickersData.value,
+//     set: (val) => {
+//         stickersData.value = val
+//     }
+// }))
 
 
 provide('loadingStickersProvideData', computed({
@@ -132,12 +133,12 @@ provide('loadingStickersProvideData', computed({
     }
 }))
 
-provide('lengthStickersProvideData', computed({
-    get: () => stickersData.value.data?.stickers.length,
-    set: (val) => {
-        stickersData.value.data.stickers.length = val
-    }
-}))
+// provide('lengthStickersProvideData', computed({
+//     get: () => stickersData.value.data?.stickers.length,
+//     set: (val) => {
+//         stickersData.value.data.stickers.length = val
+//     }
+// }))
 
 
 

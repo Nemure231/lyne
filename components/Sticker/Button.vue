@@ -2,11 +2,8 @@
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver';
 
-const stickersInfo:any = inject('stickersInfoProvideData');
-const stickersStatus:any = inject('stickersStatusProvideData');
-const stickersList:any = inject('stickersListProvideData');
-const loadingSticker:any = inject('loadingStickersProvideData');
-const lengthSticker:any = inject('lengthStickersProvideData')
+const stickers: any = inject('stickersProvideData');
+const loadingSticker: any = inject('loadingStickersProvideData');
 
 const list = ref([]);
 const stickerList = ref([]);
@@ -14,7 +11,7 @@ const stickerList = ref([]);
 let downloadImg = async () => {
     var count = 0;
 
-    stickersList.value.forEach((el: { staticUrl: any }) => {
+    stickers.value.data.stickers.value.forEach((el: { staticUrl: any }) => {
         list.value.push(el.staticUrl);
     });
 
@@ -41,10 +38,10 @@ let downloadImg = async () => {
                 zip.generateAsync({
                     type: "blob"
                 })
-                .then(function (content) {
-                    saveAs(content, `Lyn_${stickersInfo.value.title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
-                    stickerList.value = []
-                });
+                    .then(function (content) {
+                        saveAs(content, `Lyn_${stickers.value.data.title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
+                        stickerList.value = []
+                    });
             }
         });
 
@@ -72,12 +69,12 @@ let downloadImg = async () => {
         </button>
     </template>
     <template v-else>
-        <template v-if="lengthSticker >= 2 || stickersStatus.status === 200">
+        <template v-if="stickers.data.stickers.length >= 2 || stickers.status === 200">
             <button @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
                 hover:bg-green-400 cursor-pointer font-semibold bg-green-500 border-none rounded-3xl">
                 Download
             </button>
-            <a :href="stickersInfo.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
+            <a :href="stickers.data.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
                 text-white hover:bg-green-400 cursor-pointer font-semibold font-sans text-center bg-green-500
                 border-none rounded-3xl">
                 Store

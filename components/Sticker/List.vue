@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { OnClickOutside } from '@vueuse/components'
 import { saveAs } from 'file-saver';
-const stickersStatus: any = inject('stickersStatusProvideData');
-const stickersList: any = inject('stickersListProvideData');
+
+const stickers: any = inject('stickersProvideData');
 const loadingSticker: any = inject('loadingStickersProvideData');
-const lengthSticker: any = inject('lengthStickersProvideData')
 
 const focusScale = ref(0);
 
@@ -33,12 +32,12 @@ let downloadOneImg = async (eve: string, id: number) => {
     </template>
 
     <template v-else>
-        <template v-if="lengthSticker > 1 && stickersStatus.status == 200">
+        <template v-if="stickers.data.stickers.length > 1 && stickers.status == 200">
             <OnClickOutside @trigger="focusScale = 0">
                 <div
                     class="flex flex-wrap lg:justify-start md:justify-start justify-center items-center flex-row gap-6 mt-4">
 
-                    <div v-for="pl in stickersList" :key="pl.id" :style="{ backgroundImage: `url(${pl.staticUrl})` }"
+                    <div v-for="pl in stickers.data.stickers" :key="pl.id" :style="{ backgroundImage: `url(${pl.staticUrl})` }"
                         class="cursor-pointer relative rounded-md flex-none lg:w-40 lg:h-40 md:w-38 md:h-38 h-30 w-30 bg-cover"
                         :class="focusScale === pl.id ? 'scale-115' : 'scale-100'" :id="`focusScaleSticker${pl.id}`">
 
