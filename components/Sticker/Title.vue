@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const stickers: any = inject('stickersProvideData');
+const item: any = inject('stickersProvideData');
 
 const loadingSticker: any = inject('loadingStickersProvideData');
 
@@ -15,9 +15,9 @@ const loadingSticker: any = inject('loadingStickersProvideData');
         </div>
     </template>
     <template v-else>
-        <template v-if="stickers.data.stickers.length >= 2 || stickers.status === 200">
+        <template v-if="item.data.stickers.length >= 2 || item.status === 200">
 
-            <span v-text="stickers.data.title.replace('- Stiker LINE | LINE STORE', '')" class="lg:mt-0 md:mt-0 mt-3
+            <span v-text="item.data.title.replace('- Stiker LINE | LINE STORE', '')" class="lg:mt-0 md:mt-0 mt-3
                 lg:text-5xl md:text-5xl text-3xl font-bold">
 
             </span>

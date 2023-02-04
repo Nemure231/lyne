@@ -2,7 +2,7 @@
 import JSZip from 'jszip'
 import { saveAs } from 'file-saver';
 
-const stickers: any = inject('stickersProvideData');
+const item: any = inject('stickersProvideData');
 const loadingSticker: any = inject('loadingStickersProvideData');
 
 const list = ref([]);
@@ -11,7 +11,7 @@ const stickerList = ref([]);
 let downloadImg = async () => {
     var count = 0;
 
-    stickers.value.data.stickers.value.forEach((el: { staticUrl: any }) => {
+    item.value.data.stickers.value.forEach((el: { staticUrl: any }) => {
         list.value.push(el.staticUrl);
     });
 
@@ -39,7 +39,7 @@ let downloadImg = async () => {
                     type: "blob"
                 })
                     .then(function (content) {
-                        saveAs(content, `Lyn_${stickers.value.data.title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
+                        saveAs(content, `Lyn_${item.value.data.title.replace('- Stiker LINE | LINE STORE', '')}.zip`);
                         stickerList.value = []
                     });
             }
@@ -66,12 +66,12 @@ let downloadImg = async () => {
         </button>
     </template>
     <template v-else>
-        <template v-if="stickers.data.stickers.length >= 2 || stickers.status == 200">
+        <template v-if="item.data.stickers.length >= 2 || item.status == 200">
             <button @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
                 hover:bg-green-400 cursor-pointer font-semibold bg-green-500 border-none rounded-3xl">
                 Download
             </button>
-            <a :href="stickers.data.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
+            <a :href="item.data.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
                 text-white hover:bg-green-400 cursor-pointer font-semibold font-sans text-center bg-green-500
                 border-none rounded-3xl">
                 Store
