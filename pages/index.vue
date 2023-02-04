@@ -45,7 +45,7 @@ const stickersData: any = ref({
     }
 });
 
-const listSticker = ref([])
+const listSticker = ref()
 
 const searchData = ref<string>('');
 
@@ -83,7 +83,7 @@ let fec = async (link: string) => {
 
             stickersData.value = response
 
-            listSticker.value.push(response.data?.stickers)
+            listSticker.value = response.data.stickers
         }
 
         loadingData.value = false
