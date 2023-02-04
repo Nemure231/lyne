@@ -86,7 +86,7 @@ let fec = async (link: string) => {
 
             stickersData.value = response
 
-            response.data?.stickers?.forEach(element => {
+            response.data?.stickers.forEach(element => {
                 stickerList.value.push(element)
             });
 
