@@ -50,6 +50,7 @@ interface Sticker {
 }
 
 const stickersData = ref<Sticker>({});
+const stickerList = ref([])
 
 const searchData = ref<string>('');
 
@@ -82,14 +83,13 @@ let fec = async (link: string) => {
 
             const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
+            response.stickers.forEach(element => {
+                stickerList.value.push(element)
+            });
 
-            setTimeout(() => {
-                if (response.success) {
-                    stickersData.value = response
-                    loadingData.value = false
-                }
+            stickersData.value = response
+            loadingData.value = false
 
-            }, 1000);
         }
 
     } else {
@@ -116,6 +116,8 @@ provide('loadingStickersProvideData', computed({
 <template>
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
+
+        {{ stickerList }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"

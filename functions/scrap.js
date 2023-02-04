@@ -73,6 +73,11 @@ exports.handler = async (event, context, callback) => {
             status: list[0].statusCode,
             success: list[0].success,
             message: list[0].message,
+            title: title,
+            icon: icon,
+            desc: desc,
+            url: url,
+            stickers: list[0].stickers,
             data: {
                 title: title,
                 icon: icon,
