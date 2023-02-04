@@ -72,9 +72,8 @@ let fec = async (link: string) => {
     let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
 
-    const startLoadImgTime = new Date().getTime();
 
-    if (checkUrlType === true) {
+    if (checkUrlType == true) {
         if (typeof id != "number" || id === 0 || isNaN(id)) {
             alert(`The url doesn't have id of sticker line!`);
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
@@ -83,17 +82,13 @@ let fec = async (link: string) => {
             stickersData.value = {}
             searchData.value = ''
             loadingData.value = true
-            loadImgTime.value = new Date().getTime() - startLoadImgTime;
             const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`, {
                 retry: 2
             });
-
             stickersData.value = response
         }
 
-        setTimeout(async () => {
-            loadingData.value = false
-        }, loadImgTime.value);
+        loadingData.value = false
 
     } else {
         alert('The url only accept https protocol!')
@@ -191,8 +186,7 @@ useHead({
 <template>
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
-        <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)"
-            :searchPropsData="searchData" />
+        <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
             :lengthPropsData="stickersData.data?.stickers?.length" @update:model="searchData = $event" />
