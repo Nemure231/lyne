@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-const stickersStatus = inject('stickersStatusProvideData');
+const stickersStatus:any = inject('stickersStatusProvideData');
 
-const loadingSticker =  inject('loadingStickersProvideData');
-const lengthSticker = inject('lengthStickersProvideData')
-const stickersInfo = inject('stickersInfoProvideData');
+const loadingSticker:any =  inject('loadingStickersProvideData');
+const lengthSticker:any = inject('lengthStickersProvideData')
+const stickersInfo:any = inject('stickersInfoProvideData');
 </script>
 
 
 
 <template>
-    <template v-if="loadingSticker()">
+    <template v-if="loadingSticker">
         <p space-y-2>
         <div animate-pulse hover:bg-green-400 rounded-3xl lg:w-98 md:w-96 w-60 h-4 bg-gray-300>
 
@@ -28,8 +28,8 @@ const stickersInfo = inject('stickersInfoProvideData');
         </p>
     </template>
     <template v-else>
-        <template v-if="lengthSticker() >= 2 || stickersStatus().status === 200">
-            <p v-text="stickersInfo().desc"
+        <template v-if="lengthSticker >= 2 || stickersStatus.status === 200">
+            <p v-text="stickersInfo.desc"
             lg:text-lg md:text-lg text-base text-justify text-gray-600>
                
             </p>

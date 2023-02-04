@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
-const stickersInfo = inject('stickersInfoProvideData');
-const stickersStatus = inject('stickersStatusProvideData');
-const loadingSticker = inject('loadingStickersProvideData');
+const stickersInfo:any = inject('stickersInfoProvideData');
+const stickersStatus:any = inject('stickersStatusProvideData');
+const loadingSticker:any = inject('loadingStickersProvideData');
 </script>
 
 
 <template>
-    <template v-if="!loadingSticker()">
-        <template v-if="stickersStatus().status === 204">
+    <template v-if="!loadingSticker">
+        <template v-if="stickersStatus.status === 204">
             <div lg:mt-13 md:mt-13 mt-20 flex justify-center items-center flex-col mx-auto>
-                <img :src="`https://stickershop.line-scdn.net/stickershop/v1/product/${stickersInfo().url.split('/')[5]}/android/main.png`"
+                <img :src="`https://stickershop.line-scdn.net/stickershop/v1/product/${stickersInfo.url.split('/')[5]}/android/main.png`"
                     mb-6 lg:w-40 lg:h-40 md:w-38 md:h-38 w-28 h-28 object-cover alt="sticker" />
 
                 <h2 class="-mt-6" text-center text-3xl font-semibold font-sans>
@@ -19,7 +19,7 @@ const loadingSticker = inject('loadingStickersProvideData');
                 <p font-sans text-center text-gray-500 class="lg:-mt-0 md:-mt-2 -mt-0">
                     This sticker is default sticker or expired sticker!
                 </p>
-                <a :href="stickersInfo().url" text-white bg-green-500 py-3 px-6 text-center font-sans no-underline
+                <a :href="stickersInfo.url" text-white bg-green-500 py-3 px-6 text-center font-sans no-underline
                     rounded-md font-semibold text-md>
                     Line Store
                 </a>

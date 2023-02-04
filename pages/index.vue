@@ -103,12 +103,43 @@ let fec = async (link: string) => {
     }
 }
 
-provide('stickersListProvideData', () => stickersData.value.data?.stickers);
-provide('stickersInfoProvideData', () => stickersData.value.data);
-provide('stickersStatusProvideData', () => stickersData.value);
+provide('stickersListProvideData', computed({
+    get: () => stickersData.value.data?.stickers,
+    set: (val) => {
+        stickersData.value.data.stickers = val
+    }
+}))
 
-provide('loadingStickersProvideData', () => loadingData.value);
-provide('lengthStickersProvideData', () => stickersData.value.data?.stickers.length);
+provide('stickersInfoProvideData', computed({
+    get: () => stickersData.value.data,
+    set: (val) => {
+        stickersData.value.data = val
+    }
+}))
+
+provide('stickersStatusProvideData', computed({
+    get: () => stickersData.value,
+    set: (val) => {
+        stickersData.value = val
+    }
+}))
+
+
+provide('loadingStickersProvideData', computed({
+    get: () => loadingData.value,
+    set: (val) => {
+        loadingData.value = val
+    }
+}))
+
+provide('lengthStickersProvideData', computed({
+    get: () => stickersData.value.data?.stickers.length,
+    set: (val) => {
+        stickersData.value.data.stickers.length = val
+    }
+}))
+
+
 
 
 useHead({
