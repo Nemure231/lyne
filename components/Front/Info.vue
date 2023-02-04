@@ -9,7 +9,7 @@ const loadingSticker:any = inject('loadingStickersProvideData');
 <template>
 
     <template v-if="!loadingSticker">
-        <template v-if="stickersStatus.status === 0">
+        <template v-if="stickersStatus.status == 0">
             <div>
                 <div class="lg:-mt-8 md:-mt-8 -mt-0">
                     <h1 text-center text-8xl text-green-500 font-bold font-sans>Lyne</h1>

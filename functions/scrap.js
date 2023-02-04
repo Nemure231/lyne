@@ -7,10 +7,19 @@ exports.handler = async (event, context, callback) => {
 
     const url = `https://store.line.me/stickershop/product/${id}/${region}`;
 
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url)
+        .catch(function (error) {
+            return callback(null, {
+                statusCode: 200,
+                body: JSON.stringify({
+                    status: 404,
+                    success: false,
+                    message: 'This sticker not found!',
+                })
+            })
+        })
 
     const $ = cheerio.load(data);
-
     const list = []
 
     const title = $('title').text()
@@ -22,8 +31,9 @@ exports.handler = async (event, context, callback) => {
     if (checkTitle == 'LINE STORE') {
 
         const checkClass = $(".LyMain");
-        if (checkClass.length <= 1) {
+        const checkClass2 = $(".lyMainError");
 
+        if (checkClass2.length == 0) {
             const store = []
 
             $(".FnStickerList li").each(function (i, elm) {
@@ -46,20 +56,13 @@ exports.handler = async (event, context, callback) => {
                 stickers: [{}]
             })
         }
-    } else {
-        list.push({
-            success: false,
-            statusCode: 404,
-            message: 'This sticker not found!',
-            stickers: [{}]
-        })
     }
 
     const icon = $('[property="og:image"]').attr('content').replace(';compress=true', '');
     const desc = $('[name="description"]').attr('content');
 
     return callback(null, {
-        statusCode: list[0].statusCode,
+        statusCode: 200,
         body: JSON.stringify({
             status: list[0].statusCode,
             success: list[0].success,

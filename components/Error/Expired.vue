@@ -8,7 +8,7 @@ const loadingSticker:any = inject('loadingStickersProvideData');
 
 <template>
     <template v-if="!loadingSticker">
-        <template v-if="stickersStatus.status === 204">
+        <template v-if="stickersStatus.status == 204">
             <div lg:mt-13 md:mt-13 mt-20 flex justify-center items-center flex-col mx-auto>
                 <img :src="`https://stickershop.line-scdn.net/stickershop/v1/product/${stickersInfo.url.split('/')[5]}/android/main.png`"
                     mb-6 lg:w-40 lg:h-40 md:w-38 md:h-38 w-28 h-28 object-cover alt="sticker" />

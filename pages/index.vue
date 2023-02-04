@@ -220,8 +220,10 @@ useHead({
         md:overflow-x-visible overflow-x-hidden>
         <BaseNav @update:model="searchData.link = $event" @childFec="(event) => fec(event)"
             :searchPropsData="searchData.link" />
+            
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
-            :lengthPropsData="stickersData.data?.stickers.length" @update:model="searchData.link = $event" />
+            :lengthPropsData="stickersData.data.stickers.length" @update:model="searchData.link = $event" />
+
         <BaseFooter />
     </div>
 </template>
