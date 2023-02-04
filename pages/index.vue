@@ -98,7 +98,7 @@ provide('stickersProvideData', computed({
 
 
 provide('stickersListProv', computed({
-    get: () => stickersData.value.data.stickers,
+    get: () => stickersData.value.data?.stickers,
     set: (val) => {
         stickersData.value.data.stickers = val
     }
