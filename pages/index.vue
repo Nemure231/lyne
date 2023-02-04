@@ -85,7 +85,7 @@ let fec = async (link: string) => {
             });
 
             stickersData.value = response
-            stickerList.value = response.data.stickers
+            stickerList.value = response.data?.stickers
 
             loadingData.value = false
         }
