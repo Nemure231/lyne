@@ -22,10 +22,6 @@ interface Sticker {
     }
 }
 
-interface SearchSticker {
-    link?: string;
-}
-
 const stickersData: any = ref<Sticker>({
     success: false,
     message: '',
@@ -99,6 +95,15 @@ provide('stickersProvideData', computed({
         stickersData.value = val
     }
 }))
+
+
+provide('stickersListProv', computed({
+    get: () => stickersData.value.data.stickers,
+    set: (val) => {
+        stickersData.value.data.stickers = val
+    }
+}))
+
 
 provide('loadingStickersProvideData', computed({
     get: () => loadingData.value,
@@ -185,7 +190,6 @@ useHead({
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
 
-        {{ stickersData }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
