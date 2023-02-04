@@ -56,9 +56,6 @@ let downloadImg = async () => {
 
 
 <template>
-
-
-
     <template v-if="loadingSticker">
         <button class="flex-1 text-lg py-5 text-white cursor-pointer font-semibold animate-pulse hover:bg-green-400 bg-gray-300
             border-none rounded-3xl">
@@ -69,7 +66,7 @@ let downloadImg = async () => {
         </button>
     </template>
     <template v-else>
-        <template v-if="stickers.data.stickers.length >= 2 || stickers.status === 200">
+        <template v-if="stickers.data.stickers.length >= 2 || stickers.status == 200">
             <button @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
                 hover:bg-green-400 cursor-pointer font-semibold bg-green-500 border-none rounded-3xl">
                 Download
@@ -79,11 +76,8 @@ let downloadImg = async () => {
                 border-none rounded-3xl">
                 Store
             </a>
-
         </template>
-
     </template>
-
 
 </template>
 

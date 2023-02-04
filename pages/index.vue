@@ -10,17 +10,15 @@ interface Sticker {
         icon: string,
         desc: string,
         url: string,
-        stickers: [
-            {
-                type: string,
-                id: number,
-                staticUrl: string,
-                fallbackStaticUrl: string,
-                animationUrl: string,
-                popUrl: string,
-                soundUrl: string,
-            }
-        ]
+        stickers: {
+            type: string,
+            id: number,
+            staticUrl: string,
+            fallbackStaticUrl: string,
+            animationUrl: string,
+            popUrl: string,
+            soundUrl: string,
+        }[]
     }
 }
 
@@ -92,7 +90,6 @@ let fec = async (link: string) => {
             });
 
             stickersData.value = response
-
         }
 
         setTimeout(async () => {
@@ -111,36 +108,12 @@ provide('stickersProvideData', computed({
     }
 }))
 
-provide('stickersInfoProvideData', computed({
-    get: () => stickersData.value.data,
-    set: (val) => {
-        stickersData.value.data = val
-    }
-}))
-
-// provide('stickersStatusProvideData', computed({
-//     get: () => stickersData.value,
-//     set: (val) => {
-//         stickersData.value = val
-//     }
-// }))
-
-
 provide('loadingStickersProvideData', computed({
     get: () => loadingData.value,
     set: (val) => {
         loadingData.value = val
     }
 }))
-
-// provide('lengthStickersProvideData', computed({
-//     get: () => stickersData.value.data?.stickers.length,
-//     set: (val) => {
-//         stickersData.value.data.stickers.length = val
-//     }
-// }))
-
-
 
 
 useHead({
@@ -221,7 +194,7 @@ useHead({
         md:overflow-x-visible overflow-x-hidden">
         <BaseNav @update:model="searchData.link = $event" @childFec="(event) => fec(event)"
             :searchPropsData="searchData.link" />
-            
+
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData.link"
             :lengthPropsData="stickersData.data.stickers.length" @update:model="searchData.link = $event" />
 
