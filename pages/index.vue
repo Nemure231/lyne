@@ -79,11 +79,15 @@ let fec = async (link: string) => {
         } else {
             searchData.value = ''
             loadingData.value = true
-            const response:any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
+            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            stickersData.value = response
+            if (response.success) {
+                stickersData.value = response
 
-            listSticker.value = response.data.stickers
+                listSticker.value = response.data.stickers
+
+            }
+
         }
 
         loadingData.value = false
