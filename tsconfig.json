@@ -3,6 +3,9 @@
   
   "extends": "./.nuxt/tsconfig.json",
   "compilerOptions": {
-    "allowJs": true
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "allowJs": true,
+
   }
 }

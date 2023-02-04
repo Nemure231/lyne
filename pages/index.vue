@@ -1,28 +1,28 @@
 
-<script setup>
+<script setup lang="ts">
 
-// interface Sticker {
-//     success: boolean;
-//     message: string;
-//     status: number,
-//     data: {
-//         title: string,
-//         icon: string,
-//         desc: string,
-//         url: string,
-//         stickers: {
-//             type: string,
-//             id: number,
-//             staticUrl: string,
-//             fallbackStaticUrl: string,
-//             animationUrl: string,
-//             popUrl: string,
-//             soundUrl: string,
-//         }[]
-//     }
-// }
+interface Sticker {
+    success: boolean;
+    message: string;
+    status: number,
+    data: {
+        title: string,
+        icon: string,
+        desc: string,
+        url: string,
+        stickers: {
+            type: string,
+            id: number,
+            staticUrl: string,
+            fallbackStaticUrl: string,
+            animationUrl: string,
+            popUrl: string,
+            soundUrl: string,
+        }[]
+    }
+}
 
-const stickersData = ref({
+const stickersData = ref<Sticker>({
     success: false,
     message: '',
     status: 0,
@@ -45,13 +45,11 @@ const stickersData = ref({
     }
 });
 
-const listSticker = ref()
+const searchData = ref<string>('');
 
-const searchData = ref('');
+const loadingData = ref<boolean>();
 
-const loadingData = ref(false);
-
-let checkUrlImg = (url) => {
+let checkUrlImg = (url: string) => {
     if (url.match(/^https:?:\/\/.+\/.+$/)) {
         return true
     } else {
@@ -61,11 +59,12 @@ let checkUrlImg = (url) => {
 
 const config = useRuntimeConfig()
 
+const loadImgTime = ref<number>(0)
 
-let fec = async (link) => {
+let fec = async (link: string) => {
 
-    let id = Number(link.split('/')[5]);
-    let reg = link.split('/')[6];
+    let id: number = Number(link.split('/')[5]);
+    let reg: string = link.split('/')[6];
     const checkUrlType = checkUrlImg(link);
 
 
@@ -77,15 +76,9 @@ let fec = async (link) => {
         } else {
             searchData.value = ''
             loadingData.value = true
-            const response = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
+            const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            if (response.success) {
-                stickersData.value = response
-
-                listSticker.value = response.data.stickers
-
-            }
-
+            stickersData.value = response
         }
 
         loadingData.value = false
@@ -196,7 +189,7 @@ useHead({
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
 
-        {{ listSticker }}
+        {{ stickersData.data.stickers ?? [] }}
 
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
