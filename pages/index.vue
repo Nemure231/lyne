@@ -77,13 +77,16 @@ let fec = async (link: string) => {
             loadingData.value = true
             const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            if (response.status) {
-                stickersData.value = response
-                stickerList.value = response.data.stickers
-            }
+            setTimeout(() => {
+                if (response.status) {
+                    loadingData.value = false
+                    stickersData.value = response
+                    stickerList.value = response.data.stickers
+                }
+            }, 200);
+
         }
 
-        loadingData.value = false
 
     } else {
         alert('The url only accept https protocol!')
