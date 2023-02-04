@@ -83,7 +83,7 @@ let fec = async (link: string) => {
 
             const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            response.stickers.forEach(element => {
+            response.stickers?.forEach(element => {
                 stickerList.value.push(element)
             });
 
