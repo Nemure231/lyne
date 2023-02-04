@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-const item:any = inject('stickersProvideData');
+const item: any = inject('stickersProvideData');
 
-const loadingSticker:any = inject('loadingStickersProvideData');
+const loadingSticker: any = inject('loadingStickersProvideData');
 
 
 </script>
@@ -10,16 +10,17 @@ const loadingSticker:any = inject('loadingStickersProvideData');
 
 
 <template>
-    <template v-if="loadingSticker">
-        <div class="animate-pulse hover:bg-green-400 bg-gray-300 rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40
-            object-cover"></div>
-    </template>
-    <template v-else>
-        <template v-if="item.data?.stickers?.length >= 2 || item.status === 200">
-            <img class="rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40 object-cover" :src="item.data.icon"
-                alt="">
+
+    <ClientOnly>
+        <div v-if="loadingSticker" class="animate-pulse hover:bg-green-400 bg-gray-300 rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40
+                object-cover">
+        </div>
+        <template v-else>
+            <img v-if="item.data?.stickers?.length >= 2 || item.status === 200"
+                class="rounded-md flex-none lg:w-60 lg:h-60 md:w-50 md:h-50 h-40 w-40 object-cover"
+                :src="item.data.icon" alt="">
         </template>
-    </template>
+    </ClientOnly>
 
 
 </template>
