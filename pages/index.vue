@@ -189,7 +189,11 @@ useHead({
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
 
-        {{ stickersData.data?.stickers}}
+        <div v-if="stickersData.data?.stickers?.length > 1">
+
+            {{ stickersData.data.stickers}}
+        </div>
+
 
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
