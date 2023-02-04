@@ -46,8 +46,9 @@ const stickersData = ref<Sticker>({
 });
 
 const searchData = ref<string>('');
+const stickerList = ref()
 
-const loadingData = ref<boolean>();
+const loadingData = ref<boolean>(false);
 
 let checkUrlImg = (url: string) => {
     if (url.match(/^https:?:\/\/.+\/.+$/)) {
@@ -76,7 +77,10 @@ let fec = async (link: string) => {
             loadingData.value = true
             const response: any = await $fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`);
 
-            stickersData.value = response
+            if (response.status) {
+                stickersData.value = response
+                stickerList.value = response.data.stickers
+            }
         }
 
         loadingData.value = false
@@ -178,7 +182,7 @@ useHead({
 <template>
     <div class="bg-white mx-auto h-auto w-screen flex flex-wrap flex-col justify-center relative lg:overflow-x-visible
         md:overflow-x-visible overflow-x-hidden">
-        {{ stickersData.data.stickers}}
+        {{ stickerList }}
         <BaseNav @update:model="searchData = $event" @childFec="(event) => fec(event)" :searchPropsData="searchData" />
 
         <BaseMain @childFec="(event) => fec(event)" :searchPropsData="searchData"
