@@ -4,8 +4,6 @@
 
 [build]
   functions = "functions/"
-  publish = "dist"
-  command = "npm run install && npm run build"
 
 [[redirects]]
   from = "/*"
