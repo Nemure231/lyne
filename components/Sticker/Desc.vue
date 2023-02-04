@@ -26,7 +26,7 @@ const loadingSticker: any = inject('loadingStickersProvideData');
         </p>
     </template>
     <template v-else>
-        <template v-if="item.data.stickers.length>= 2 || item.status === 200">
+        <template v-if="item.data?.stickers?.length>= 2 || item.status === 200">
             <p v-text="item.data.desc" class="lg:text-lg md:text-lg text-base text-justify text-gray-600">
 
             </p>

@@ -11,7 +11,7 @@ const stickerList = ref([]);
 let downloadImg = async () => {
     var count = 0;
 
-    item.value.data.stickers.value.forEach((el: { staticUrl: any }) => {
+    item.value.data?.stickers?.forEach((el: { staticUrl: any }) => {
         list.value.push(el.staticUrl);
     });
 
@@ -66,7 +66,7 @@ let downloadImg = async () => {
         </button>
     </template>
     <template v-else>
-        <template v-if="item.data.stickers.length >= 2 || item.status == 200">
+        <template v-if="item.data?.stickers?.length >= 2 || item.status == 200">
             <button @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
                 hover:bg-green-400 cursor-pointer font-semibold bg-green-500 border-none rounded-3xl">
                 Download

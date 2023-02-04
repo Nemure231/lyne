@@ -15,7 +15,7 @@ const loadingSticker: any = inject('loadingStickersProvideData');
         </div>
     </template>
     <template v-else>
-        <template v-if="item.data.stickers.length >= 2 || item.status === 200">
+        <template v-if="item.data?.stickers?.length >= 2 || item.status === 200">
 
             <span v-text="item.data.title.replace('- Stiker LINE | LINE STORE', '')" class="lg:mt-0 md:mt-0 mt-3
                 lg:text-5xl md:text-5xl text-3xl font-bold">
