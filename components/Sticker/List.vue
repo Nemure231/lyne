@@ -22,6 +22,7 @@ let downloadOneImg = async (eve: string, id: number) => {
 
 
 <template>
+    
     <template v-if="loadingSticker">
         <div flex flex-wrap lg:justify-start md:justify-start justify-center items-center flex-row gap-6 lg:mt-0 md:mt-0
             mt-4>

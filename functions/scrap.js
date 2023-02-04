@@ -59,8 +59,9 @@ exports.handler = async (event, context, callback) => {
     const desc = $('[name="description"]').attr('content');
 
     return callback(null, {
-        statusCode: 200,
+        statusCode: list[0].statusCode,
         body: JSON.stringify({
+            status: list[0].statusCode,
             success: list[0].success,
             message: list[0].message,
             data: {
