@@ -45,7 +45,7 @@ const stickersData: any = ref({
     }
 });
 
-const listSticker = ref()
+const listSticker = ref([])
 
 const searchData = ref<string>('');
 
