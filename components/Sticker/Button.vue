@@ -66,11 +66,11 @@ let downloadImg = async () => {
         </template>
 
         <template v-else>
-            <button v-if="item.data?.stickers?.length > 0 || item.status == 200" @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
+            <button v-if="item.data?.stickers?.length > 0 && item.status == 200" @click="downloadImg" class="flex-1 lg:text-lg md:text-lg sm:text-md text-base py-2 px-3 text-white
                         hover:bg-green-400 cursor-pointer font-semibold bg-green-500 border-none rounded-3xl">
                 Download
             </button>
-            <a v-if="item.data?.stickers?.length > 0 || item.status == 200" :href="item.data.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
+            <a v-if="item.data?.stickers?.length > 0 && item.status == 200" :href="item.data.url" class="no-underline lg:text-xl md:text-xl sm:text-lg text-md flex-1 py-2 px-3
                         text-white hover:bg-green-400 cursor-pointer font-semibold font-sans text-center bg-green-500
                         border-none rounded-3xl">
                 Store
