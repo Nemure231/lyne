@@ -67,12 +67,16 @@ const config = useRuntimeConfig()
 
 let fec = async (link: string) => {
 
-    let id: number = Number(link.split('/')[5]);
-    let reg: string = link.split('/')[6];
+    const id: string = link.split('/')[5];
+    const reg: string = link.split('/')[6];
+    const type:string = link.split('/')[3].replace('shop', '');
+
+    console.log(reg, type, id)
+
     const checkUrlType = checkUrlImg(link);
     
     if (checkUrlType == true) {
-        if (typeof id != "number" || id === 0 || isNaN(id)) {
+        if (!id) {
             alert(`The url doesn't have id of sticker line!`);
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
             alert(`The url doesn't have region of sticker line!`)
@@ -80,7 +84,7 @@ let fec = async (link: string) => {
             loadingData.value = true
             searchData.value = ''
 
-            await fetch(`${config.public.api_netlify_function}/scrap?id=${id}&region=${reg}`)
+            await fetch(`${config.public.api_netlify_function}/scrap?id=${id}&type=${type}&region=${reg}`)
                 .then((response) => response.json())
                 .then((data) => {
 

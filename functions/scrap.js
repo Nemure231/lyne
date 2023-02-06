@@ -3,9 +3,9 @@ const axios = require("axios");
 
 exports.handler = async (event, context, callback) => {
 
-    const { id = 0, region = '' } = event.queryStringParameters;
+    const { id = 0, region = '', type = '' } = event.queryStringParameters;
 
-    const url = `https://store.line.me/stickershop/product/${id}/${region}`;
+    const url = `https://store.line.me/${type}shop/product/${id}/${region}`;
 
     const { data } = await axios.get(url)
         .catch(function (error) {
@@ -42,10 +42,19 @@ exports.handler = async (event, context, callback) => {
         if (checkClass2.length == 0) {
             const store = []
 
-            $(".FnStickerList li").each(function (i, elm) {
-                const data_sticker = $(this).data('preview');
-                store.push(data_sticker);
-            });
+            if (type == 'sticker') {
+                $(".FnStickerList li").each(function (i, elm) {
+                    const data_sticker = $(this).data('preview');
+                    store.push(data_sticker);
+                });
+            }
+
+            if (type == 'emoji') {
+                $(".FnEmoji_animation_list_img li").each(function (i, elm) {
+                    const data_sticker = $(this).data('preview');
+                    store.push(data_sticker);
+                });
+            }
 
             list.push({
                 success: true,
