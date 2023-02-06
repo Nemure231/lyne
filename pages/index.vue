@@ -7,7 +7,7 @@ useHead({
     meta: [
         { name: 'charset', content: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
-        { name: 'description', content: 'Line stickers downloader' },
+        { name: 'description', content: 'Line stickers/emoji downloader' },
         { name: 'keywords', content: 'downloader, download, scrap, image, ' },
         { name: 'author', content: 'Karol.Y' },
         { name: 'theme-color', content: '#1f1f1f' },
@@ -17,7 +17,7 @@ useHead({
         { property: 'og:title', content: 'Lyne' },
         { property: 'og:url', content: 'https://lyne.netlify.app/' },
         { property: 'og:description', content: 'Line stickers downloader' },
-        { property: 'og:image', content: '/img/logo/logo.png' },
+        { property: 'og:image', content: 'https://lyne.netlify.app/img/logo/logo.png' },
         { property: 'og:image:alt', content: 'Lyne' }
     ],
     link: [
@@ -77,9 +77,9 @@ let fec = async (link: string) => {
     
     if (checkUrlType == true) {
         if (!id) {
-            alert(`The url doesn't have id of sticker line!`);
+            alert(`The url doesn't have id of sticker/emoji line!`);
         } else if (typeof reg != "string" || reg === '' || reg === undefined) {
-            alert(`The url doesn't have region of sticker line!`)
+            alert(`The url doesn't have region of sticker/emoji line!`)
         } else {
             loadingData.value = true
             searchData.value = ''

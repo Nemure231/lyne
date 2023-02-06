@@ -40,7 +40,7 @@ const model = computed({
                     items-center gap-1">
                     <input ref="input" v-model="model"
                         class="shadow-lg focus:outline-none border-none text-xs sm:w-80 w-37 rounded-3xl px-3 py-2.5"
-                        type="text" placeholder="Link sticker ...." />
+                        type="text" placeholder="Link sticker/emoji ...." />
 
                     <button type="submit" class="hover:bg-gray-200 shadow-lg inline-flex lg:justify-center md:justify-center
                         justify-center gap-x-1 p-1 items-center cursor-pointer

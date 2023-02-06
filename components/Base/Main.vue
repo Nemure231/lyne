@@ -43,7 +43,7 @@ const model = computed({
 
                             <input ref="input" v-model="model" class="shadow-lg focus:outline-none border-3 border-green-500
                                 xl:text-lg text-base xl:w-96 lg:w-80 md:w-90 w-72 rounded-3xl px-3 xl:py-3 py-3"
-                                type="text" placeholder="Link sticker ...." />
+                                type="text" placeholder="Link sticker/emoji ...." />
 
 
                             <button type="submit" class="hover:bg-green-400 shadow-lg inline-flex lg:justify-center

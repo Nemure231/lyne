@@ -1,5 +1,6 @@
 {
   "private": true,
+  "name": "lyne",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

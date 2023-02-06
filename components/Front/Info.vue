@@ -14,7 +14,7 @@ const loadingSticker: any = inject('loadingStickersProvideData');
                 <div class="lg:-mt-8 md:-mt-8 -mt-0">
                     <h1 class="text-center text-8xl text-green-500 font-bold font-sans">Lyne</h1>
                     <h2 class="-mt-6 text-center text-3xl font-semibold font-sans">
-                        Line Sticker Downloader
+                        Line Sticker/Emoji Downloader
                     </h2>
                 </div>
                 <div class="flex flex-nowrap flex-row items-center justify-center mx-auto xl:w-130 lg:w-130 md:w-96 w-64
